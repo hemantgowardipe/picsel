@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the members page of PICSEL">
+    <title>PICSEL 2025</title>
+    
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <%-include('partials/navbar')%>
+    <div class="home-members">
+<h2>Our Teachers</h2>
+<div class="flexbox-sa">
+  <%members.map((mem,ind)=>{%>
+  <%if(!mem.teacher)return;%>
+<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo}) %>
+<%})%>
+</div>
+<h2>Our Members</h2>
+<div class="flexbox-sa">
+ <%members.map((mem,ind)=>{%>
+  <%if(mem.teacher)return;%>
+<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo}) %>
+<%})%>
+
+</div>
+</div>
+<%- include('partials/footer') %>
+</body>
+</html>

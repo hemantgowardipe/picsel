@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the upcoming event page of PICSEL">
+    <title>PICSEL 2025</title>
+    
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <%-include('partials/navbar')%>
+    <h2>Upcoming Events</h2>
+<div class="flexbox-sa">
+  <%events.map((event,ind)=>{%>
+<%- include('partials/card',{name:event.name,details:new Date(event.date),poster:event.poster,id:event.id}) %>
+<%})%>
+</div>
+<%- include('partials/footer') %>
+</body>
+</html>

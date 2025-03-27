@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the about page of PICSEL">
+    <title>PICSEL 2025</title>
+    
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <%-include('partials/navbar')%>
+    <div class="about ">
+        <h1>About Us</h1>
+        <div class="flexbox-sa">
+            <img src="college.jpg" alt="college"/>
+            <div>
+                <h2>Welcome to Picsel</h2>
+                <p>
+                    Our forum is a vibrant space where like-minded individuals come together to share ideas, discuss topics of interest, and build meaningful connections. Whether you're here to learn, teach, or simply explore, we're glad to have you with us!
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+<%- include('partials/footer') %>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script>
+    gsap.from('img',{rotateY:90})
+    </script>
+    </body>
+</html>

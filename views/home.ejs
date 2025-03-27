@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the forum website of PICSEL, a student committee of engineering students of branch CSE">
+    <title>PICSEL 2025</title>
+    
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <%-include('partials/navbar')%>
+    <div class="hero">
+        <div class="hero-head flexbox-column">
+         <h1>PICSEL</h1>
+         <p>
+            A place where CSE students connect, collaborate, and grow! Whether you're debugging code, preparing for placements, or discussing the latest tech trends, you're in the right place.
+         </p>
+         <a href="/about">Read More</a>
+
+        </div>
+         <div class="flexbox hero-slider">
+<img src="test.jpg" alt="test" loading="lazy">
+<img src="test.jpg" alt="test" loading="lazy">
+<img src="test.jpg" alt="test" loading="lazy">
+<img src="test.jpg" alt="test" loading="lazy">
+<img src="test.jpg" alt="test" loading="lazy">
+         </div>
+    </div>
+
+
+
+<div class="home-feature flexbox-sa">
+
+<ul class="flexbox-column flexbox-sa">
+
+<li class="flexbox">
+<span>
+<img src="leader.svg" alt="leader">
+</span>
+<div>
+<h5> Leadership </h5> 
+<p> Vibrant leadership fuels success with energy. </p>
+</div>
+</li>
+<b></b>
+<li class="flexbox">
+<span>
+<img src="respons.svg" alt="responsibility">
+</span>
+<div>
+<h5> Responsibility </h5> 
+<p> Responsibility fuels trust and integrity. </p>
+</div>
+</li>
+<b></b>
+<li class="flexbox">
+<span>
+<img src="flexi.svg" alt="flexibility">
+</span>
+<div>
+<h5> Flexibility </h5> 
+<p>
+Flexibility empowers adaptability and innovation.
+ </p>
+</div>
+</li>
+<b></b>
+<li class="flexbox">
+<span>
+<img src="stp.svg" alt="stp">
+</span>
+<div>
+<h5> Solve the problem </h5> 
+<p> Code your way to a solution </p>
+</div>
+</li>
+</ul>
+
+<div class="flexbox flexbox-column">
+<div></div>
+<img loading="lazy" src="test.jpg" alt="group_photo"/>
+<span>Evolving minds shaping the digital frontier together
+    timelineImage</span>
+
+</div>
+</div>
+<div class="home-vision">
+    <h2>Our Vision</h2>
+    <div class="flexbox-sa">
+<div>
+<h3>Face Challenges:</h3>
+<p>The PICSEL committee envisions empowering engineering students to confidently navigate the challenges encountered throughout their academic journey.</p>
+</div>
+<div>
+<h3>Culture of Innovation:</h3>
+<p>The PICSEL committee aims to foster a culture of innovation among students by providing opportunities for research, idea exploration, and peer collaboration.</p>
+</div>
+<div>
+<h3>Diversity</h3>
+<p>The PICSEL committee is dedicated to promoting inclusivity within the student community. Our vision is to cultivate an environment where students from all backgrounds thrive and feel valued and included.</p>
+</div>
+        </div>
+
+</div>
+<div class="home-members">
+<h2>Our Teachers</h2>
+<div class="flexbox-sa">
+  <%members.map((mem,ind)=>{%>
+  <%if(!mem.teacher)return;%>
+<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:mem.id}) %>
+<%})%>
+</div>
+<h2>Our Members</h2>
+
+<div class="flexbox-sa">
+  <%members.map((mem,ind)=>{%>
+  <%if(mem.teacher)return;%>
+<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:mem.id}) %>
+<%})%>
+</div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+gsap.fromTo('.hero-slider',{
+    rotate:'10deg',
+    rotateX:'40deg',
+    opacity:0.2
+
+},
+  {
+    rotate:'0deg'
+    ,rotateX:0
+    ,opacity:1
+,scrollTrigger:{
+  trigger:'.home-feature',
+  end:'top 100%',
+  start:'top 200%',
+  markers:true,
+  scrub:true
+}
+});
+
+</script>
+</body>
+</html>

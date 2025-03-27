@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the add event page of PICSEL">
+    <title>PICSEL 2025</title>
+    
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <%-include('partials/navbar')%>
+    <div class="addmember">
+        <h1>Add Event</h1>
+        <form action="/api/addevent" method="post" enctype="multipart/form-data" class="flexbox-column">
+            <input type="text" name="name" placeholder="Name">
+            <input type="file" name="poster" placeholder="Post">
+	    <input type="datetime-local" name="date" placeholder="set date">
+	    <input type="text" name="venue" placeholder="set venue">
+<input type="text" name="link" placeholder="set link">
+            <div id="rulesContainer">
+                <input type="text" name="rules[]" placeholder="Add rule">
+            </div>
+            <button type="button" onclick="addRuleInput()">Add Another Rule</button>
+
+            <script>
+                function addRuleInput() {
+                    const container = document.getElementById('rulesContainer');
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = 'rules[]';
+                    input.placeholder = 'Add rule';
+                    container.appendChild(input);
+                }
+            </script>
+
+            <button type="submit">Add Event</button>
+        </form>
+    </div>
+    <%-include('partials/footer')%>
+</body>
+</html>

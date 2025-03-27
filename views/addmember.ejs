@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the add member page of PICSEL">
+    <title>PICSEL 2025</title>
+    
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <%-include('partials/navbar')%>
+    <div class="addmember">
+        <h1>Add Member</h1>
+        <form action="/api/addmember" method="post" enctype="multipart/form-data" class="flexbox-column">
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="post" placeholder="Post">
+            <input type="file" name="photo" placeholder="Photo">
+            <div class="flexbox-column">
+            <label for="type">Is this a teacher?</label>
+            <input type="checkbox" name="type" >
+</div>
+            <button type="submit">Add Member</button>
+        </form>
+    </div>
+    <%-include('partials/footer')%>
+</body>
+</html>

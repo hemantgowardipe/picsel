@@ -1,0 +1,23 @@
+<div class="home-event flexbox">
+    <div class="heventdata">
+        <h2><%=name%></h2>
+        <h4><%=date%></h4>
+    </div>
+    <div class="heventimg">
+        <h2>Details</h2>
+        <ol>
+            <%rules.map((rule,ind)=>{%>
+<li key="<%=ind%>"><%=rule%></li>
+            <%})%>
+        </ol>
+
+<div class="flexbox-sa">
+<%image.map((img,ind)=>{%>
+    <%if(ind>3) return;%>
+<img key='<%=ind%>'src="<%=img%>"/>
+            <%})%>
+</div>
+
+    </div>
+
+</div>

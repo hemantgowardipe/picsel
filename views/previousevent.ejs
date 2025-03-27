@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the previous event page of PICSEL">
+    <title>PICSEL 2025</title>
+    
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <%-include('partials/navbar')%>
+<div class="home-eventcon">
+<h1>Events</h1>
+    <%-include('partials/event',{name:"Ritish",date:'10 feb 2005',rules:['my name is ritish','i am 20 years old'],
+        image:['test.jpg','test.jpg','test.jpg','test.jpg','test.jpg']
+    },)%>
+    <%-include('partials/event',{name:"Ritish",date:'10 feb 2005',rules:['my name is ritish','i am 20 years old'],
+        image:['test.jpg','test.jpg','test.jpg','test.jpg','test.jpg']
+    },)%>
+    <%-include('partials/event',{name:"Ritish",date:'10 feb 2005',rules:['my name is ritish','i am 20 years old'],
+        image:['test.jpg','test.jpg','test.jpg','test.jpg','test.jpg']
+    },)%>
+    <%-include('partials/event',{name:"Ritish",date:'10 feb 2005',rules:['my name is ritish','i am 20 years old'],
+        image:['test.jpg','test.jpg','test.jpg','test.jpg','test.jpg']
+    },)%>
+</div>
+<%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is the add member page of PICSEL">
+    <title>PICSEL 2025</title>
+    
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <%-include('partials/navbar')%>
+    <h1><%=event[0].name%></h1>
+    <div class="event-container">
+        <div class="event-image">
+            <img src="<%=event[0].poster%>" alt="<%=event[0].name%>">
+        </div>
+        <div class="event-details">
+            <p><%=new Date(event[0].date).toLocaleDateString()%></p>
+            <p><%=event[0].venue%></p>
+            <% event[0].rules.forEach(rule => { %>
+                <p><%=rule%></p>
+            <% }) %>
+            <a href="<%=event[0].link%>">Register</a>
+        </div>
+        <div class="flexbox">
+            <%event[0].images&&event[0].images.forEach(image => { %>
+                <div class="event-image">
+                    <img src="<%=image%>" alt="<%=event[0].name%>">
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <%-include('partials/footer')%>
+</body>
+</html>
