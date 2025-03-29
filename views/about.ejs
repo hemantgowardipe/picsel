@@ -5,31 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="This is the about page of PICSEL">
     <title>PICSEL 2025</title>
-    
-    <link href="/css/style.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-
+<body class="bg-gray-50 min-h-screen flex flex-col">
     <%-include('partials/navbar')%>
-    <div class="about ">
-        <h1>About Us</h1>
-        <div class="flexbox-sa">
-            <img src="college.jpg" alt="college"/>
-            <div>
-                <h2>Welcome to Picsel</h2>
-                <p>
-                    Our forum is a vibrant space where like-minded individuals come together to share ideas, discuss topics of interest, and build meaningful connections. Whether you're here to learn, teach, or simply explore, we're glad to have you with us!
-                </p>
+
+    <!-- About Section -->
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">About Us</h1>
+                <p class="mt-4 text-xl text-gray-600">Learn more about the PICSEL committee</p>
             </div>
 
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="college.jpg" alt="college" class="rounded-lg shadow-xl w-full h-[400px] object-cover"/>
+                </div>
+                <div class="space-y-6">
+                    <h2 class="text-3xl font-bold text-gray-900">Welcome to Picsel</h2>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        Our forum is a vibrant space where like-minded individuals come together to share ideas, discuss topics of interest, and build meaningful connections. Whether you're here to learn, teach, or simply explore, we're glad to have you with us!
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 mt-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-blue-600 mb-2">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900">Innovation</h3>
+                            <p class="text-gray-600 mt-2">Fostering creativity and new ideas</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-blue-600 mb-2">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900">Community</h3>
+                            <p class="text-gray-600 mt-2">Building strong connections</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </main>
 
-    </div>
+    <%- include('partials/footer') %>
 
-<%- include('partials/footer') %>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-<script>
-    gsap.from('img',{rotateY:90})
+    <script>
+        gsap.from('img', {
+            rotateY: 90,
+            duration: 1,
+            ease: "power2.out"
+        });
     </script>
-    </body>
+</body>
 </html>

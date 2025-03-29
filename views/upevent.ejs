@@ -6,16 +6,33 @@
     <meta name="description" content="This is the upcoming event page of PICSEL">
     <title>PICSEL 2025</title>
     
-    <link href="/css/style.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
 </head>
-<body>
-    <%-include('partials/navbar')%>
-    <h2>Upcoming Events</h2>
-<div class="flexbox-sa">
-  <%events.map((event,ind)=>{%>
-<%- include('partials/card',{name:event.name,details:new Date(event.date),poster:event.poster,id:event.id}) %>
-<%})%>
-</div>
-<%- include('partials/footer') %>
+<body class="min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <%- include('partials/navbar') %>
+        
+        <h2 class="text-4xl font-bold text-center mb-8 text-gray-900">Upcoming Events</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% events.map((event,ind) => { %>
+                <%- include('partials/card', {
+                    name: event.name,
+                    details: new Date(event.date),
+                    poster: event.poster,
+                    id: event.id
+                }) %>
+            <% }) %>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
 </body>
 </html>

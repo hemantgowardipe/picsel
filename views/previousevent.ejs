@@ -6,78 +6,85 @@
     <meta name="description" content="This is the previous event page of PICSEL">
     <title>PICSEL 2025</title>
     
-    <link href="/css/style.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
 </head>
-<body>
-<div  style="display:none;" class="errorbox flexbox flexbox-column">
+<body class="min-h-screen">
+    <!-- Error Box -->
+    <div class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center justify-between w-full max-w-md mx-4 z-50 hidden" id="errorbox">
+        <span id="errormessage" class="font-medium">message</span>
+        <button onclick="hideerror()" class="ml-4 px-3 py-1 bg-white text-red-500 rounded-full hover:bg-red-50 transition-colors">X</button>
+    </div>
 
-  <span class="flexbox">
-<button onclick="hideerror()">X</button>
-  </span>
-    <div>message</div>
-</div>
-<h1>Events</h1>
-<%- include('partials/navbar') %>
-<div>
-  <% events.forEach(event => { %>
-    <%- include('partials/event', { name: event.name, date: event.date, rules: event.rules, image: event.images,id:event.id,poster:event.poster }) %>
-  <% }); %>
-</div>
-<%- include('partials/footer') %>
-<script>
-async function handleSubmit(id, event) {
-  event.preventDefault(); // Prevent default form submission
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gray-900">Previous Events</h1>
+        <%- include('partials/navbar') %>
+        
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% events.forEach(event => { %>
+                <%- include('partials/event', { 
+                    name: event.name, 
+                    date: event.date, 
+                    rules: event.rules, 
+                    image: event.images,
+                    id: event.id,
+                    poster: event.poster 
+                }) %>
+            <% }); %>
+        </div>
+    </div>
 
-  const formData = new FormData();
+    <%- include('partials/footer') %>
 
-  // Select the file input field
-  const fileInput = event.target.querySelector('input[type="file"]');
+    <script>
+    async function handleSubmit(id, event) {
+        event.preventDefault();
+        const formData = new FormData();
+        const fileInput = event.target.querySelector('input[type="file"]');
+        
+        if (fileInput.files.length === 0) {
+            showerror("No file selected!");
+            return;
+        }
 
-  if (fileInput.files.length === 0) {
-    console.log("No files selected");
-    return;
-  }
+        for (let file of fileInput.files) {
+            formData.append("images", file);
+        }
 
-  // Append each selected file to FormData
-  for (let file of fileInput.files) {
-    formData.append("images", file);
-  }
+        const response = await fetch(`/api/updateevent/${id}`, {
+            method: "PUT",
+            body: formData,
+            credentials: "include"
+        });
+        const result = await response.json();
+        showerror(result.message);
+    }
 
-  // Send files via fetch
-  const response = await fetch(`/api/updateevent/${id}`, {
-    method: "PUT",
-    body: formData,
-    credentials: "include" // Include cookies for authentication
-  });
+    async function handleDelete(id) {
+        const response = await fetch(`/api/delevent/${id}`, {
+            credentials: "include",
+            method: "DELETE"
+        });
+        const result = await response.json();
+        showerror(result.message);
+    }
 
-  const result = await response.json();
-  showerror(result.message);
-}
+    function showerror(message) {
+        const errorbox = document.getElementById("errorbox");
+        document.getElementById("errormessage").innerText = message;
+        errorbox.classList.remove("hidden");
+        setTimeout(() => errorbox.classList.add("hidden"), 3000);
+    }
 
-const errorbox = document.querySelector('.errorbox');
-console.log(errorbox);
-
-function showerror(message) {
-errorbox.style.display='flex';
-  errorbox.children[1].innerText=message;
-  
-document.body.style.overflow = "hidden";
-}
-
-function hideerror() {
-  console.log('working');
-errorbox.style.display='none';
-document.body.style.overflow = "auto";
-}
-
-async function handleDelete(id){
-    const result = await fetch(`/api/delevent/${id}`,{
-credentials:'include',
-     method:'delete' 
-    }).then(res=>res.json());
-    alert(result.message);
-    
-  }
-</script>
+    function hideerror() {
+        document.getElementById("errorbox").classList.add("hidden");
+    }
+    </script>
 </body>
 </html>

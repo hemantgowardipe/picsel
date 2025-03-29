@@ -1,22 +1,95 @@
-<nav class="flexbox-sa">
-<a href='/'>PICSEL</a>
-<div class="nav-one flexbox-sa">
-<a href='/members'>Members</a>
-<span>Events
-<div >
-<a href='/upevent'>Upcoming Events</a>
-<a href='/prevevent'>Previous events</a>
-</div>
-</span>
-<span>Admin
-<div >
-<a href='/admin/addevent'>Add Event</a>
-<a href='/admin/addmember'>Add Member</a>
-</div>
-</span>
-</div>
-<div class="nav-two flexbox">
-<a href='/about'>About</a>
-<a href='/admin/login'>Login</a>
-</div>
+<nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center">
+                <a href="/" class="text-2xl font-bold text-blue-600">PICSEL</a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="/members" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Members</a>
+                
+                <!-- Events Dropdown -->
+                <div class="relative group">
+                    <button class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        Events
+                        <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <div class="py-1">
+                            <a href="/upevent" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Upcoming Events</a>
+                            <a href="/prevevent" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Previous Events</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Dropdown -->
+                <div class="relative group">
+                    <button class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        Admin
+                        <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <div class="py-1">
+                            <a href="/admin/addevent" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Add Event</a>
+                            <a href="/admin/addmember" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Add Member</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/about" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                <a href="/admin/login" id="login" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Login</a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+                <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu hidden md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="/members" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Members</a>
+            <a href="/upevent" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Upcoming Events</a>
+            <a href="/prevevent" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Previous Events</a>
+            <a href="/admin/addevent" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Add Event</a>
+            <a href="/admin/addmember" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Add Member</a>
+            <a href="/about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">About</a>
+            <a href="/admin/login" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Login</a>
+        </div>
+    </div>
 </nav>
+
+<script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    async function authcheck(){
+        const response = await fetch('/api/authcheck');
+        const data = await response.json();
+        console.log(data);
+        if(data.status){
+            document.getElementById('login').innerHTML = 'Logout';
+            document.getElementById('login').href = '/api/logout';
+            document.getElementById('login').style.backgroundColor = 'red';
+            document.getElementById('login').style.color = 'white';
+        }
+    }
+    authcheck();
+</script>

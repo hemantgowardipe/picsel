@@ -1,6 +1,7 @@
 const express = require('express');
 const Router = express.Router();
 const pool = require('../db.js');
+const auth = require('../middlewares/auth.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -32,5 +33,14 @@ Router.route('/login').post(async (req, res) => {
     res.status(500).json({ status: false, message: 'Internal Server Error' });
   }
 });
+
+Router.route('/logout').get(async (req, res) => {
+  res.clearCookie('token');
+  res.json({ status: true, message: 'Logout successful' });
+});
+
+Router.route('/authcheck').get(auth, (req, res) => {
+  res.json({ status: true, message: 'Authenticated' });
+}); 
 
 module.exports = Router;

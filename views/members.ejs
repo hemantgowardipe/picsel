@@ -5,38 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="This is the members page of PICSEL">
     <title>PICSEL 2025</title>
-    
-    <link href="/css/style.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
+<body class="bg-gray-50 min-h-screen flex flex-col">
     <%-include('partials/navbar')%>
-    <div class="home-members">
-<h2>Our Teachers</h2>
-<div class="flexbox-sa">
-  <%members.map((mem,ind)=>{%>
-  <%if(!mem.teacher)return;%>
-<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
-<%})%>
-</div>
-<h2>Our Members</h2>
-<div class="flexbox-sa">
- <%members.map((mem,ind)=>{%>
-  <%if(mem.teacher)return;%>
-<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
-<%})%>
 
-</div>
-</div>
-<%- include('partials/footer') %>
+    <!-- Members Section -->
+    <main class="flex-grow py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Teachers Section -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Our Teachers</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <%members.forEach((mem) => { %>
+                        <%if(!mem.teacher) return;%>
+                        <%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
+                    <%})%>
+                </div>
+            </section>
+
+            <!-- Student Members Section -->
+            <section>
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Our Members</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <%members.forEach((mem) => { %>
+                        <%if(mem.teacher) return;%>
+                        <%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
+                    <%})%>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script>
+        async function handleDelete(id){
+            const result = await fetch(`/api/deletemember/${id}`,{
+                credentials:'include',
+                method:'delete' 
+            }).then(res=>res.json());
+            alert(result.message);
+        }
+    </script>
 </body>
-<script>
-  async function handleDelete(id){
-    const result = await fetch(`/api/deletemember/${id}`,{
-credentials:'include',
-     method:'delete' 
-    }).then(res=>res.json());
-    alert(result.message);
-    
-  }
-</script>
 </html>

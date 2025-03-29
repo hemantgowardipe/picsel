@@ -5,72 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="This is the forum website of PICSEL, a student committee of engineering students of branch CSE">
     <title>PICSEL 2025</title>
-    
-    <link href="/css/style.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-<%- include('partials/navbar') %>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <%- include('partials/navbar') %>
 
-<div style="display:none;" class="errorbox flexbox flexbox-column">
-    <span class="flexbox">
-        <button onclick="hideError()">X</button>
-    </span>
-    <div class="error-message">message</div>
-</div>
+    <!-- Error Box -->
+    <div id="errorBox" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">Message</h3>
+                <button onclick="hideError()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <p id="errorMessage" class="text-gray-600"></p>
+        </div>
+    </div>
 
-<h1>Admin Login</h1>
-<form onsubmit="handleSubmit(event)">
-    <label>
-        Username
-        <input type="text" name="username" required />
-    </label>
-    
-    <label>
-        Password
-        <input type="password" name="password" required />
-    </label>
-    
-    <input type="submit" value="Login" />
-</form>
+    <!-- Login Form -->
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <div>
+                <h1 class="text-center text-3xl font-extrabold text-gray-900">Admin Login</h1>
+                <p class="mt-2 text-center text-sm text-gray-600">
+                    Please sign in to access the admin panel
+                </p>
+            </div>
+            <form class="mt-8 space-y-6" onsubmit="handleSubmit(event)">
+                <div class="rounded-md shadow-sm -space-y-px">
+                    <div>
+                        <label for="username" class="sr-only">Username</label>
+                        <input id="username" name="username" type="text" required 
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
+                            placeholder="Username">
+                    </div>
+                    <div>
+                        <label for="password" class="sr-only">Password</label>
+                        <input id="password" name="password" type="password" required 
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
+                            placeholder="Password">
+                    </div>
+                </div>
 
-<%- include('partials/footer') %>
+                <div>
+                    <button type="submit" 
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <svg class="h-5 w-5 text-blue-500 group-hover:text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        Sign in
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
 
-<script>
-async function handleSubmit(event) {
-    event.preventDefault(); // Prevent default form submission
-    
-    const form = event.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+    <%- include('partials/footer') %>
 
-    const response = await fetch("/api/login", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
 
-    const result = await response.json();
+            const response = await fetch("/api/login", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
 
-    if (response.ok) {
-        showError("Login successful!");
-    } else {
-        showError("Login failed: " + result.message);
-    }
-}
+            const result = await response.json();
 
-function showError(message) {
-    const errorBox = document.querySelector(".errorbox");
-    errorBox.style.display = "flex";
-    errorBox.querySelector(".error-message").innerText = message;
-    document.body.style.overflow = "hidden";
-}
+            if (response.ok) {
+                showError("Login successful!");
+                setTimeout(() => {
+                    window.location.href = "/admin/addevent";
+                }, 1000);
+            } else {
+                showError("Login failed: " + result.message);
+            }
+        }
 
-function hideError() {
-    const errorBox = document.querySelector(".errorbox");
-    errorBox.style.display = "none";
-    document.body.style.overflow = "auto";
-}
-</script>
+        function showError(message) {
+            const errorBox = document.getElementById("errorBox");
+            const errorMessage = document.getElementById("errorMessage");
+            errorBox.classList.remove("hidden");
+            errorMessage.innerText = message;
+            document.body.style.overflow = "hidden";
+        }
+
+        function hideError() {
+            const errorBox = document.getElementById("errorBox");
+            errorBox.classList.add("hidden");
+            document.body.style.overflow = "auto";
+        }
+    </script>
+</body>
+</html>

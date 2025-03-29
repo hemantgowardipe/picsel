@@ -1,15 +1,19 @@
-<div class="card flexbox flexbox-column"
-    <% if (id!=='na') { %> onclick={window.location.href="/api/event/<%= id %>"} <% } %>>
-    <img src="<%= poster %>" alt="event_poster"/>
-    <h2><%= name %></h2>
-    <p><%= details %></p>
+<div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
+    <% if (id!=='na') { %> onclick="window.location.href='/api/event/<%= id %>'" <% } %>>
+    <div class="relative h-48">
+        <img src="<%= poster %>" alt="event_poster" class="w-full h-full object-cover"/>
+    </div>
+    <div class="p-4">
+        <h2 class="text-xl font-semibold text-gray-900 mb-2"><%= name %></h2>
+        <p class="text-gray-600"><%= details %></p>
+    </div>
 
-<%if(id==='na'){%>
-
-
-<button onclick="handleDelete(<%=na%>)"> Delete </button>
-
-
-<%}%>
-
+    <%if(id==='na'){%>
+    <div class="p-4 border-t border-gray-100">
+        <button onclick="handleDelete(<%=na%>)" 
+                class="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition-colors duration-300">
+            Delete
+        </button>
+    </div>
+    <%}%>
 </div>

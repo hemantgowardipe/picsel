@@ -5,184 +5,181 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="This is the forum website of PICSEL, a student committee of engineering students of branch CSE">
     <title>PICSEL 2025</title>
-    
-    <link href="/css/style.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
+<body class="bg-gray-50">
     <%-include('partials/navbar')%>
-<div  style="display:none;" class="errorbox flexbox flexbox-column">
 
-  <span class="flexbox">
-<button onclick="hideerror()">X</button>
-  </span>
-    <div>message</div>
-</div>
-    <div class="hero">
-        <div class="hero-head flexbox-column">
-         <h1>PICSEL</h1>
-         <p>
-            A place where CSE students connect, collaborate, and grow! Whether you're debugging code, preparing for placements, or discussing the latest tech trends, you're in the right place.
-         </p>
-         <a href="/about">Read More</a>
-
+    <!-- Error Box -->
+    <div id="errorBox" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">Error</h3>
+                <button onclick="hideerror()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <p id="errorMessage" class="text-gray-600"></p>
         </div>
-         <div class="flexbox hero-slider">
-<img src="test.jpg" alt="test" loading="lazy">
-<img src="test.jpg" alt="test" loading="lazy">
-<img src="test.jpg" alt="test" loading="lazy">
-<img src="test.jpg" alt="test" loading="lazy">
-<img src="test.jpg" alt="test" loading="lazy">
-         </div>
     </div>
 
-
-
-<div class="home-feature flexbox-sa">
-
-<ul class="flexbox-column flexbox-sa">
-
-<li class="flexbox">
-<span>
-<img src="leader.svg" alt="leader">
-</span>
-<div>
-<h5> Leadership </h5> 
-<p> Vibrant leadership fuels success with energy. </p>
-</div>
-</li>
-<b></b>
-<li class="flexbox">
-<span>
-<img src="respons.svg" alt="responsibility">
-</span>
-<div>
-<h5> Responsibility </h5> 
-<p> Responsibility fuels trust and integrity. </p>
-</div>
-</li>
-<b></b>
-<li class="flexbox">
-<span>
-<img src="flexi.svg" alt="flexibility">
-</span>
-<div>
-<h5> Flexibility </h5> 
-<p>
-Flexibility empowers adaptability and innovation.
- </p>
-</div>
-</li>
-<b></b>
-<li class="flexbox">
-<span>
-<img src="stp.svg" alt="stp">
-</span>
-<div>
-<h5> Solve the problem </h5> 
-<p> Code your way to a solution </p>
-</div>
-</li>
-</ul>
-
-<div class="flexbox flexbox-column">
-<div></div>
-<img loading="lazy" src="test.jpg" alt="group_photo"/>
-<span>Evolving minds shaping the digital frontier together
-    timelineImage</span>
-
-</div>
-</div>
-<div class="home-vision">
-    <h2>Our Vision</h2>
-    <div class="flexbox-sa">
-<div>
-<h3>Face Challenges:</h3>
-<p>The PICSEL committee envisions empowering engineering students to confidently navigate the challenges encountered throughout their academic journey.</p>
-</div>
-<div>
-<h3>Culture of Innovation:</h3>
-<p>The PICSEL committee aims to foster a culture of innovation among students by providing opportunities for research, idea exploration, and peer collaboration.</p>
-</div>
-<div>
-<h3>Diversity</h3>
-<p>The PICSEL committee is dedicated to promoting inclusivity within the student community. Our vision is to cultivate an environment where students from all backgrounds thrive and feel valued and included.</p>
-</div>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col lg:flex-row items-center justify-between px-4 py-12 lg:px-8">
+        <div class="lg:w-1/2 space-y-6 text-center lg:text-left">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900">PICSEL</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0">
+                A place where CSE students connect, collaborate, and grow! Whether you're debugging code, preparing for placements, or discussing the latest tech trends, you're in the right place.
+            </p>
+            <a href="/about" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                Read More
+            </a>
         </div>
+        <div class="lg:w-1/2 mt-8 lg:mt-0">
+            <div class="hero-slider grid grid-cols-2 gap-4">
+                <img src="test.jpg" alt="test" class="rounded-lg shadow-lg w-full h-48 object-cover">
+                <img src="test.jpg" alt="test" class="rounded-lg shadow-lg w-full h-48 object-cover">
+                <img src="test.jpg" alt="test" class="rounded-lg shadow-lg w-full h-48 object-cover">
+                <img src="test.jpg" alt="test" class="rounded-lg shadow-lg w-full h-48 object-cover">
+            </div>
+        </div>
+    </section>
 
-</div>
-<div class="home-members">
-<h2>Our Teachers</h2>
-<div class="flexbox-sa">
-  <%members.map((mem,ind)=>{%>
-  <%if(!mem.teacher)return;%>
-<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
-<%})%>
-</div>
-<h2>Our Members</h2>
+    <!-- Features Section -->
+    <section class="py-16 px-4 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-4">
+                        <img src="leader.svg" alt="leader" class="w-12 h-12">
+                        <div>
+                            <h5 class="text-xl font-semibold text-gray-900">Leadership</h5>
+                            <p class="text-gray-600">Vibrant leadership fuels success with energy.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="respons.svg" alt="responsibility" class="w-12 h-12">
+                        <div>
+                            <h5 class="text-xl font-semibold text-gray-900">Responsibility</h5>
+                            <p class="text-gray-600">Responsibility fuels trust and integrity.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="flexi.svg" alt="flexibility" class="w-12 h-12">
+                        <div>
+                            <h5 class="text-xl font-semibold text-gray-900">Flexibility</h5>
+                            <p class="text-gray-600">Flexibility empowers adaptability and innovation.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <img src="stp.svg" alt="stp" class="w-12 h-12">
+                        <div>
+                            <h5 class="text-xl font-semibold text-gray-900">Solve the problem</h5>
+                            <p class="text-gray-600">Code your way to a solution</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img loading="lazy" src="test.jpg" alt="group_photo" class="rounded-lg shadow-lg w-full max-w-md">
+                    <p class="mt-4 text-center text-gray-600">Evolving minds shaping the digital frontier together</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="flexbox-sa">
-  <%members.map((mem,ind)=>{%>
-  <%if(mem.teacher)return;%>
-<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
-<%})%>
-</div>
-</div>
+    <!-- Vision Section -->
+    <section class="py-16 px-4 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Our Vision</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Face Challenges</h3>
+                    <p class="text-gray-600">The PICSEL committee envisions empowering engineering students to confidently navigate the challenges encountered throughout their academic journey.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Culture of Innovation</h3>
+                    <p class="text-gray-600">The PICSEL committee aims to foster a culture of innovation among students by providing opportunities for research, idea exploration, and peer collaboration.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Diversity</h3>
+                    <p class="text-gray-600">The PICSEL committee is dedicated to promoting inclusivity within the student community. Our vision is to cultivate an environment where students from all backgrounds thrive and feel valued and included.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<%- include('partials/footer') %>
+    <!-- Members Section -->
+    <section class="py-16 px-4 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Our Teachers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <%members.forEach((mem) => { %>
+                    <%if(!mem.teacher) return;%>
+                    <%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
+                <%})%>
+            </div>
+            
+            <h2 class="text-3xl font-bold text-center mt-16 mb-12">Our Members</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <%members.forEach((mem) => { %>
+                    <%if(mem.teacher) return;%>
+                    <%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
+                <%})%>
+            </div>
+        </div>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-<script>
-gsap.registerPlugin(ScrollTrigger);
-gsap.fromTo('.hero-slider',{
-    rotate:'10deg',
-    rotateX:'40deg',
-    opacity:0.2
+    <%- include('partials/footer') %>
 
-},
-  {
-    rotate:'0deg'
-    ,rotateX:0
-    ,opacity:1
-,scrollTrigger:{
-  trigger:'.home-feature',
-  end:'top 100%',
-  start:'top 200%',
-  markers:true,
-  scrub:true
-}
-});
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.fromTo('.hero-slider',{
+            rotate:'10deg',
+            rotateX:'40deg',
+            opacity:0.2
+        },
+        {
+            rotate:'0deg',
+            rotateX:0,
+            opacity:1,
+            scrollTrigger:{
+                trigger:'.home-feature',
+                end:'top 100%',
+                start:'top 200%',
+                scrub:true
+            }
+        });
 
-const errorbox = document.querySelector('.errorbox');
-console.log(errorbox);
+        const errorBox = document.getElementById('errorBox');
+        const errorMessage = document.getElementById('errorMessage');
 
-function showerror(message) {
-errorbox.style.display='flex';
-  errorbox.children[1].innerText=message;
-  
-document.body.style.overflow = "hidden";
-}
+        function showerror(message) {
+            errorBox.classList.remove('hidden');
+            errorMessage.innerText = message;
+            document.body.style.overflow = "hidden";
+        }
 
-function hideerror() {
-  console.log('working');
-errorbox.style.display='none';
-document.body.style.overflow = "auto";
-}
-if(<%=error.status%>){
-  showerror("<%=error.message%>");
-}
-else{
-  hideerror();
-}
+        function hideerror() {
+            errorBox.classList.add('hidden');
+            document.body.style.overflow = "auto";
+        }
 
-  async function handleDelete(id){
-    const result = await fetch(`/api/deletemember/${id}`,{
-credentials:'include',
-     method:'delete' 
-    }).then(res=>res.json());
-    alert(result.message);
-    
-  }
-</script>
+        if(<%=error.status%>){
+            showerror("<%=error.message%>");
+        } else {
+            hideerror();
+        }
+
+        async function handleDelete(id){
+            const result = await fetch(`/api/deletemember/${id}`,{
+                credentials:'include',
+                method:'delete' 
+            }).then(res=>res.json());
+            alert(result.message);
+        }
+    </script>
 </body>
 </html>
