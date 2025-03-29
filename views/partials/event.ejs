@@ -2,22 +2,36 @@
     <div class="heventdata">
         <h2><%=name%></h2>
         <h4><%=date%></h4>
+	<button onclick="handleDelete(<%=id%>)">Delete Event</button>
+	<img src="<%=poster%>" alt="poster"/>
     </div>
     <div class="heventimg">
         <h2>Details</h2>
         <ol>
+	<%if(rules){%>
             <%rules.map((rule,ind)=>{%>
 <li key="<%=ind%>"><%=rule%></li>
             <%})%>
+	    <%}%>
         </ol>
-
-<div class="flexbox-sa">
-<%image.map((img,ind)=>{%>
-    <%if(ind>3) return;%>
-<img key='<%=ind%>'src="<%=img%>"/>
-            <%})%>
-</div>
-
     </div>
 
+<div class="heventform">
+<form onsubmit="handleSubmit(<%=id%>,event)" enctype="multipart/form-data" method="post">
+  <label for="images">Submit Photos</label>
+  <input type="file" multiple name="images" />
+  <input type="submit" value="Upload"/>
+</form>
+
+<div class="flexbox-sa">
+	<%if(image){%>
+<%image.forEach(img=>{%>
+    <img src="<%=img%>"/>
+            <%})%>
+	    <%}%>
 </div>
+</div>
+
+
+</div>
+

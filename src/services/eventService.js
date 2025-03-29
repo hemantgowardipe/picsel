@@ -41,8 +41,16 @@ async function deleteEvent(id){
 
 async function updateEvent(id, event){
     try{
+      if(event.images){
+	console.log("problem in query");
         const result = await pool.query('UPDATE events SET images=$1 WHERE id = $2', [event.images, id]);
         return result.rows[0];
+      }
+      else{
+        const result = await pool.query('UPDATE events SET complete=true WHERE id = $1', [id]);
+        return result.rows[0];
+}
+      
     }
     catch(error){
         throw error;

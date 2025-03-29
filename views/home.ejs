@@ -10,6 +10,13 @@
 </head>
 <body>
     <%-include('partials/navbar')%>
+<div  style="display:none;" class="errorbox flexbox flexbox-column">
+
+  <span class="flexbox">
+<button onclick="hideerror()">X</button>
+  </span>
+    <div>message</div>
+</div>
     <div class="hero">
         <div class="hero-head flexbox-column">
          <h1>PICSEL</h1>
@@ -108,7 +115,7 @@ Flexibility empowers adaptability and innovation.
 <div class="flexbox-sa">
   <%members.map((mem,ind)=>{%>
   <%if(!mem.teacher)return;%>
-<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:mem.id}) %>
+<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na'}) %>
 <%})%>
 </div>
 <h2>Our Members</h2>
@@ -116,7 +123,7 @@ Flexibility empowers adaptability and innovation.
 <div class="flexbox-sa">
   <%members.map((mem,ind)=>{%>
   <%if(mem.teacher)return;%>
-<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:mem.id}) %>
+<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na'}) %>
 <%})%>
 </div>
 </div>
@@ -146,6 +153,36 @@ gsap.fromTo('.hero-slider',{
 }
 });
 
+const errorbox = document.querySelector('.errorbox');
+console.log(errorbox);
+
+function showerror(message) {
+errorbox.style.display='flex';
+  errorbox.children[1].innerText=message;
+  
+document.body.style.overflow = "hidden";
+}
+
+function hideerror() {
+  console.log('working');
+errorbox.style.display='none';
+document.body.style.overflow = "auto";
+}
+if(<%=error.status%>){
+  showerror("<%=error.message%>");
+}
+else{
+  hideerror();
+}
+
+  async function handleDelete(id){
+    const result = await fetch(`/api/deletemember/${id}`,{
+credentials:'include',
+     method:'delete' 
+    }).then(res=>res.json());
+    alert(result.message);
+    
+  }
 </script>
 </body>
 </html>

@@ -172,50 +172,64 @@ filter:brightness(70%);
 .home-event{
   margin:100px 0;
 width:100%;
-align-items: flex-start;
   position:relative;
 }
 .heventdata{
   width:30%;
   flex-shrink:0;
   position:sticky;
-  top:10px;
+  top:0;
+}
+.heventdata img{
+width:90%;
 }
 .heventimg{
-  width:70%;
+  width:30%;
+  flex-shrink:0;
 }
 .heventimg ol{
   padding:1rem;
 }
-.heventimg>div{
+.heventform{
+width:40%;
+  flex-shrink:0;
+  flex-grow:0;
+}
+.heventform>div{
   gap:30px;
   flex-wrap: wrap;
+  width:100%;
 }
-.heventimg img{
-  width:45%;
+.heventform img{
+  width:300px;
+  flex-shrink:0;
 }
 nav{
   position:relative;
 }
-nav>div>span>div{
+.nav-one>span>div{
   display: none;
   position:absolute;
   flex-direction: column;
 background:var(--bg2);
 }
-nav>div>span:hover>div{
+.nav-one>span:hover>div{
 display: flex;
 cursor: pointer;
 }
-nav>div>span a{
+.nav-one>span a{
 background:var(--bg2);
   color:var(--bg);
   padding:1rem;
   text-decoration: none;
 }
-nav>div{
+.nav-one{
   width:40%;
 }
+.nav-two{
+gap:20px;
+}
+
 .card{
   height:60vh;
   width:400px;
@@ -269,6 +283,52 @@ footer div{
   width:30%;
   margin:30vh auto;
 }
+
 .addmember form{
   gap:1rem;
+}
+.event-div{
+height:100vh;
+width:100vw;
+padding:1rem;
+}
+.event-div h1,.event-div h2{
+text-align:center;
+width:100%;
+}
+.event-div>div{
+  width:40%;
+gap:50px;
+}
+.event-div>div>div{
+width:60%;
+}
+.event-div>img{
+height:60%;
+box-shadow:0 0 5px 15px var(--accent2);
+}
+.errorbox{
+  position:absolute;
+  width:100vw;
+  height:100vh;
+  z-index:10;
+  backdrop-filter:blur(10px);
+  background:rgb(0,0,0,0.3);
+}
+.errorbox>div{
+  background: black;
+  border-radius:20px;
+ padding:1rem;
+ color:white;
+width:50%;
+  box-shadow:0 0 2px 5px white;
+}
+.errorbox>span{
+justify-content:flex-end;
+width:50%;
+}
+.errorbox button{
+background:red;
+color:white;
+font-size:2rem;
 }

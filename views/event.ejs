@@ -10,27 +10,38 @@
 </head>
 <body>
     <%-include('partials/navbar')%>
-    <h1><%=event[0].name%></h1>
-    <div class="event-container">
-        <div class="event-image">
-            <img src="<%=event[0].poster%>" alt="<%=event[0].name%>">
-        </div>
-        <div class="event-details">
-            <p><%=new Date(event[0].date).toLocaleDateString()%></p>
-            <p><%=event[0].venue%></p>
-            <% event[0].rules.forEach(rule => { %>
-                <p><%=rule%></p>
+    <div class=" event-div flexbox-sa">
+      <div class="flexbox-column flexbox-sa">
+	<h1><%=event[0].name%></h1>
+	<button onclick="handleDelete(<%=event[0].id%>)">Delete Event</button>
+	<h2>Rules</h2>
+	<ol>
+<% event[0].rules.forEach(rule => { %>
+                <li><%=rule%></li>
             <% }) %>
+	</ol>
+	
+	<div class='flexbox-column'>
+<span>Date: <%=new Date(event[0].date).toLocaleDateString()%></span>
+
+	<span>Venue: <%=event[0].venue%></span>
             <a href="<%=event[0].link%>">Register</a>
-        </div>
-        <div class="flexbox">
-            <%event[0].images&&event[0].images.forEach(image => { %>
-                <div class="event-image">
-                    <img src="<%=image%>" alt="<%=event[0].name%>">
-                </div>
-            <% }) %>
-        </div>
+	</div>
+
+      </div>
+      <img src="<%=event[0].poster%>" alt="<%=event[0].name%>"/>
     </div>
+
     <%-include('partials/footer')%>
+    <script>
+async function handleDelete(id){
+    const result = await fetch(`/api/delevent/${id}`,{
+credentials:'include',
+     method:'delete' 
+    }).then(res=>res.json());
+    alert(result.message);
+    
+  }
+    </script>
 </body>
 </html>

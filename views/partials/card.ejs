@@ -1,6 +1,15 @@
-<div class="card flexbox flexbox-column" 
-     onclick="window.location.href='<%= process.env.BASE_NAME %>/api/event/<%= id %>'">
+<div class="card flexbox flexbox-column"
+    <% if (id!=='na') { %> onclick={window.location.href="/api/event/<%= id %>"} <% } %>>
     <img src="<%= poster %>" alt="event_poster"/>
     <h2><%= name %></h2>
     <p><%= details %></p>
+
+<%if(id==='na'){%>
+
+
+<button onclick="handleDelete(<%=na%>)"> Delete </button>
+
+
+<%}%>
+
 </div>

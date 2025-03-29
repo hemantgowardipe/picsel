@@ -15,18 +15,28 @@
 <div class="flexbox-sa">
   <%members.map((mem,ind)=>{%>
   <%if(!mem.teacher)return;%>
-<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo}) %>
+<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
 <%})%>
 </div>
 <h2>Our Members</h2>
 <div class="flexbox-sa">
  <%members.map((mem,ind)=>{%>
   <%if(mem.teacher)return;%>
-<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo}) %>
+<%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
 <%})%>
 
 </div>
 </div>
 <%- include('partials/footer') %>
 </body>
+<script>
+  async function handleDelete(id){
+    const result = await fetch(`/api/deletemember/${id}`,{
+credentials:'include',
+     method:'delete' 
+    }).then(res=>res.json());
+    alert(result.message);
+    
+  }
+</script>
 </html>

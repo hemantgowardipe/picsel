@@ -9,22 +9,75 @@
     <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <%-include('partials/navbar')%>
-<div class="home-eventcon">
+<div  style="display:none;" class="errorbox flexbox flexbox-column">
+
+  <span class="flexbox">
+<button onclick="hideerror()">X</button>
+  </span>
+    <div>message</div>
+</div>
 <h1>Events</h1>
-    <%-include('partials/event',{name:"Ritish",date:'10 feb 2005',rules:['my name is ritish','i am 20 years old'],
-        image:['test.jpg','test.jpg','test.jpg','test.jpg','test.jpg']
-    },)%>
-    <%-include('partials/event',{name:"Ritish",date:'10 feb 2005',rules:['my name is ritish','i am 20 years old'],
-        image:['test.jpg','test.jpg','test.jpg','test.jpg','test.jpg']
-    },)%>
-    <%-include('partials/event',{name:"Ritish",date:'10 feb 2005',rules:['my name is ritish','i am 20 years old'],
-        image:['test.jpg','test.jpg','test.jpg','test.jpg','test.jpg']
-    },)%>
-    <%-include('partials/event',{name:"Ritish",date:'10 feb 2005',rules:['my name is ritish','i am 20 years old'],
-        image:['test.jpg','test.jpg','test.jpg','test.jpg','test.jpg']
-    },)%>
+<%- include('partials/navbar') %>
+<div>
+  <% events.forEach(event => { %>
+    <%- include('partials/event', { name: event.name, date: event.date, rules: event.rules, image: event.images,id:event.id,poster:event.poster }) %>
+  <% }); %>
 </div>
 <%- include('partials/footer') %>
+<script>
+async function handleSubmit(id, event) {
+  event.preventDefault(); // Prevent default form submission
+
+  const formData = new FormData();
+
+  // Select the file input field
+  const fileInput = event.target.querySelector('input[type="file"]');
+
+  if (fileInput.files.length === 0) {
+    console.log("No files selected");
+    return;
+  }
+
+  // Append each selected file to FormData
+  for (let file of fileInput.files) {
+    formData.append("images", file);
+  }
+
+  // Send files via fetch
+  const response = await fetch(`/api/updateevent/${id}`, {
+    method: "PUT",
+    body: formData,
+    credentials: "include" // Include cookies for authentication
+  });
+
+  const result = await response.json();
+  showerror(result.message);
+}
+
+const errorbox = document.querySelector('.errorbox');
+console.log(errorbox);
+
+function showerror(message) {
+errorbox.style.display='flex';
+  errorbox.children[1].innerText=message;
+  
+document.body.style.overflow = "hidden";
+}
+
+function hideerror() {
+  console.log('working');
+errorbox.style.display='none';
+document.body.style.overflow = "auto";
+}
+
+async function handleDelete(id){
+    const result = await fetch(`/api/delevent/${id}`,{
+credentials:'include',
+     method:'delete' 
+    }).then(res=>res.json());
+    alert(result.message);
+    
+  }
+</script>
 </body>
 </html>
