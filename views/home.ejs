@@ -6,6 +6,109 @@
     <meta name="description" content="This is the forum website of PICSEL, a student committee of engineering students of branch CSE">
     <title>PICSEL 2025</title>
  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+ <style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Floating Animation */
+    .floating {
+        animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* Button Hover Effect */
+    .btn-glow {
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-glow::before {
+        content: '';
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+        transform: rotate(45deg);
+        transition: all 0.5s ease-in-out;
+    }
+    .btn-glow:hover::before {
+        top: 0;
+        left: 0;
+    }
+
+    /* Glowing Timeline */
+.timeline-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 6px;
+    background: linear-gradient(to bottom, #3b82f6, #a855f7);
+    box-shadow: 0px 0px 15px rgba(59, 130, 246, 0.8);
+    border-radius: 50px;
+    height: 100%;
+}
+
+/* Animated Dotted Effect */
+.timeline-glow::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9);
+    animation: moveDown 3s infinite alternate ease-in-out;
+}
+
+@keyframes moveDown {
+    from {
+        top: 0;
+    }
+    to {
+        top: 100%;
+    }
+}
+
+
+.vision-box {
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Hover effect */
+    .vision-box:hover {
+        border-color: #4f46e5; /* Change border color */
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); /* Soft glow effect */
+        transform: scale(1.05); /* Slight scale effect */
+    }
+
+    /* Gradient effect on hover */
+    .vision-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(79, 70, 229, 0.1), rgba(79, 70, 229, 0.3), rgba(79, 70, 229, 0.1));
+        transition: left 0.5s ease-in-out;
+    }
+
+    .vision-box:hover::before {
+        left: 100%;
+    }
+
+</style>
 </head>
 <body class="bg-gray-50">
     <%-include('partials/navbar')%>
@@ -26,114 +129,928 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex flex-col lg:flex-row items-center justify-between px-4 py-12 lg:px-8">
-        <div class="lg:w-1/2 space-y-6 text-center lg:text-left">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-900">PICSEL</h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0">
+    <!-- Combined Hero Section with Fixed Background and Timeline -->
+<section class="relative min-h-screen overflow-hidden">
+    <!-- Fixed Background Component -->
+    <div class="fixed inset-0 w-full h-full -z-10">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100"></div>
+        <div class="absolute top-0 left-0 w-full h-full">
+            <iframe src='https://my.spline.design/nexbotrobotcharacterconcept-19b2058afa841db72b1a5e1277b37aa1/' frameborder='0' width='100%' height='100%'></iframe>
+        </div>
+        <!-- Animated Particles -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute w-4 h-4 bg-blue-400 rounded-full opacity-20 animate-float" style="top: 10%; left: 15%;"></div>
+            <div class="absolute w-6 h-6 bg-indigo-500 rounded-full opacity-20 animate-float" style="top: 35%; left: 80%; animation-delay: 1s;"></div>
+            <div class="absolute w-3 h-3 bg-purple-400 rounded-full opacity-20 animate-float" style="top: 70%; left: 30%; animation-delay: 2s;"></div>
+            <div class="absolute w-5 h-5 bg-blue-500 rounded-full opacity-20 animate-float" style="top: 45%; left: 10%; animation-delay: 3s;"></div>
+            <div class="absolute w-4 h-4 bg-indigo-400 rounded-full opacity-20 animate-float" style="top: 20%; left: 60%; animation-delay: 4s;"></div>
+        </div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="flex flex-col lg:flex-row items-center justify-between px-4 py-12 lg:px-8 min-h-screen">
+        <div class="lg:w-1/2 space-y-6 text-center lg:text-left z-10">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight opacity-0 hero-title">
+                PICSEL 2025
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0 opacity-0 hero-desc">
                 A place where CSE students connect, collaborate, and grow! Whether you're debugging code, preparing for placements, or discussing the latest tech trends, you're in the right place.
             </p>
-            <a href="/about" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+            <a href="/about" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition duration-300 btn-glow opacity-0 hero-btn">
                 Read More
             </a>
         </div>
-        <div class="lg:w-1/2 mt-8 lg:mt-0">
-            <div class="hero-slider grid grid-cols-2 gap-4">
-                <img src="test.jpg" alt="test" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                <img src="test.jpg" alt="test" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                <img src="test.jpg" alt="test" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                <img src="test.jpg" alt="test" class="rounded-lg shadow-lg w-full h-48 object-cover">
-            </div>
+        <!-- Floating Image Grid -->
+        <div class="lg:w-1/2 mt-8 lg:mt-0 grid grid-cols-2 gap-4 opacity-0 hero-images z-10">
+            <img src="Corecommittee1.jpg" alt="Core_Committee" class="rounded-lg shadow-lg w-full h-48 object-cover floating">
+            <img src="Faculty1.jpg" alt="Faculty" class="rounded-lg shadow-lg w-full h-48 object-cover floating" style="animation-delay: 0.2s;">
+            <img src="index.jpg" alt="Website Team" class="rounded-lg shadow-lg w-full h-48 object-cover floating" style="animation-delay: 0.4s;">
+            <img src="AllCommittee1.jpg" alt="PICSEL Committee" class="rounded-lg shadow-lg w-full h-48 object-cover floating" style="animation-delay: 0.6s;">
         </div>
-    </section>
+    </div>
 
-    <!-- Features Section -->
-    <section class="py-16 px-4 lg:px-8 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="space-y-8">
-                    <div class="flex items-start space-x-4">
-                        <img src="leader.svg" alt="leader" class="w-12 h-12">
+    <!-- Timeline Section -->
+    <div class="py-16 px-4 lg:px-8 relative">
+        <div class="max-w-7xl mx-auto relative">
+            <!-- Glowing Timeline -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-blue-500 via-purple-500 to-indigo-500 h-full timeline-glow"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                
+                <!-- Leadership -->
+                <div class="relative flex items-center justify-start">
+                    <div class="flex items-start space-x-4 bg-white p-6 rounded-lg shadow-lg w-4/5 z-10">
+                        <img src="leader.svg" alt="leader" class="w-16 h-16">
                         <div>
-                            <h5 class="text-xl font-semibold text-gray-900">Leadership</h5>
-                            <p class="text-gray-600">Vibrant leadership fuels success with energy.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="respons.svg" alt="responsibility" class="w-12 h-12">
-                        <div>
-                            <h5 class="text-xl font-semibold text-gray-900">Responsibility</h5>
-                            <p class="text-gray-600">Responsibility fuels trust and integrity.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="flexi.svg" alt="flexibility" class="w-12 h-12">
-                        <div>
-                            <h5 class="text-xl font-semibold text-gray-900">Flexibility</h5>
-                            <p class="text-gray-600">Flexibility empowers adaptability and innovation.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <img src="stp.svg" alt="stp" class="w-12 h-12">
-                        <div>
-                            <h5 class="text-xl font-semibold text-gray-900">Solve the problem</h5>
-                            <p class="text-gray-600">Code your way to a solution</p>
+                            <h5 class="text-xl font-semibold text-gray-900"><b>Leadership</b></h5>
+                            <p class="text-gray-600 font-serif not-italic">Vibrant leadership fuels success with energy.</p>
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col items-center">
-                    <img loading="lazy" src="test.jpg" alt="group_photo" class="rounded-lg shadow-lg w-full max-w-md">
-                    <p class="mt-4 text-center text-gray-600">Evolving minds shaping the digital frontier together</p>
+                <div class="relative flex justify-end">
+                    <img src="Leadership.jpeg" alt="Leadership" class="w-4/5 h-48 object-cover rounded-lg shadow-md z-10">
+                </div>
+
+                <!-- Responsibility -->
+                <div class="relative flex justify-start">
+                    <img src="Responsibility.jpg" alt="Responsibility" class="w-4/5 h-48 object-cover rounded-lg shadow-md z-10">
+                </div>
+                <div class="relative flex items-center justify-end">
+                    <div class="flex items-start space-x-4 bg-white p-6 rounded-lg shadow-lg w-4/5 z-10">
+                        <img src="respons.svg" alt="responsibility" class="w-16 h-16">
+                        <div>
+                            <h5 class="text-xl font-semibold text-gray-900"><b>Responsibility</b></h5>
+                            <p class="text-gray-600 font-serif not-italic">Responsibility fuels trust and integrity.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flexibility -->
+                <div class="relative flex items-center justify-start">
+                    <div class="flex items-start space-x-4 bg-white p-6 rounded-lg shadow-lg w-4/5 z-10">
+                        <img src="flexi.svg" alt="flexibility" class="w-16 h-16">
+                        <div>
+                            <h5 class="text-xl font-semibold text-gray-900"><b>Flexibility</b></h5>
+                            <p class="text-gray-600 font-serif not-italic">Flexibility empowers adaptability and innovation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative flex justify-end">
+                    <img src="Flexibility.jpg" alt="Flexibility" class="w-4/5 h-48 object-cover rounded-lg shadow-md z-10">
+                </div>
+
+                <!-- Solve The Problem -->
+                <div class="relative flex justify-start">
+                    <img src="Solve_Problem.jpg" alt="Problem Solving" class="w-4/5 h-48 object-cover rounded-lg shadow-md z-10">
+                </div>
+                <div class="relative flex items-center justify-end">
+                    <div class="flex items-start space-x-4 bg-white p-6 rounded-lg shadow-lg w-4/5 z-10">
+                        <img src="stp.svg" alt="stp" class="w-16 h-16">
+                        <div>
+                            <h5 class="text-xl font-semibold text-gray-900"><b>Solve the problem</b></h5>
+                            <p class="text-gray-600 font-serif not-italic">Code your way to a solution.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- CSS to add to your stylesheet of combined hero and timeline section -->
+<style>
+    /* Animation for floating elements */
+    .floating {
+        animation: float 6s ease-in-out infinite;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s forwards, float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    /* Animation for hero content elements */
+    .hero-title, .hero-desc, .hero-btn, .hero-images {
+        animation: fadeInUp 0.8s forwards;
+        animation-delay: 0.2s;
+    }
+    .hero-desc {
+        animation-delay: 0.4s;
+    }
+    .hero-btn {
+        animation-delay: 0.6s;
+    }
+    .hero-images {
+        animation-delay: 0.8s;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Timeline glow effect */
+    .timeline-glow {
+        height: 0;
+        animation: growTimeline 1.5s forwards;
+        animation-delay: 1s;
+        box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+    }
+
+    @keyframes growTimeline {
+        from { height: 0; }
+        to { height: 100%; }
+    }
+
+    /* Button glow effect */
+    .btn-glow {
+        box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+    }
+
+    /* Floating particles animation */
+    @keyframes float {
+        0% { transform: translate(0, 0); }
+        25% { transform: translate(10px, 10px); }
+        50% { transform: translate(0, 20px); }
+        75% { transform: translate(-10px, 10px); }
+        100% { transform: translate(0, 0); }
+    }
+
+    .animate-float {
+        animation: float 10s ease-in-out infinite;
+    }
+    
+    /* Ensure responsive timeline for mobile */
+    @media (max-width: 768px) {
+        .timeline-glow {
+            left: 20px;
+        }
+    }
+</style>
+
+<!-- JavaScript for scroll-based animations of combined hero and timeline section -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // If timeline section is visible, start the timeline animation
+            if (entry.isIntersecting) {
+                entry.target.classList.add('timeline-visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Track the timeline section
+    const timelineSection = document.querySelector('.timeline-glow');
+    if (timelineSection) {
+        observer.observe(timelineSection);
+    }
+});
+</script>
+
+    <!-- Teachers Section -->
+    <main class="flex-grow py-12 bg-transparent text-gray-900 w-full">
+        <div class="w-[90%] mx-auto">
+            <!-- Teachers Section -->
+            <section class="mb-16 text-center">
+                <h2 class="text-5xl md:text-7xl font-extrabold not-italic tracking-wider text-gray-900 leading-tight opacity-0 hero-title">
+                    Meet Our Faculty
+                </h2>
+                <div class="relative w-full overflow-hidden">
+                    <div class="flex space-x-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-4 py-6" id="carousel-container">
+                        <% members.forEach((mem) => { %>
+                            <% if (!mem.teacher) return; %>
+                            <div class="relative flex-shrink-0 w-80 h-96 snap-center perspective">
+                                <div class="relative w-full h-full transform transition-all duration-700 preserve-3d shadow-xl rounded-2xl cursor-pointer" id="card-<%= mem.id %>" data-flipped="false">
+                                    <!-- Front Side -->
+                                    <div class="absolute inset-0 w-full h-full backface-hidden overflow-hidden rounded-2xl">
+                                        <div class="relative h-full">
+                                            <img src="<%= mem.photo %>" alt="<%= mem.name %>" class="w-full h-full object-cover">
+                                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-12 pb-6 px-6 text-center">
+                                                <h3 class="text-xl font-bold text-white uppercase font-montserrat leading-tight line-clamp-2 tracking-wide text-shadow"><%= mem.name %></h3>
+                                                <p class="text-gray-300 text-sm italic font-light tracking-wider mt-2 line-clamp-1 text-shadow-sm transform translate-y-0 opacity-100 transition-all duration-300"><%= mem.post %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 text-white flex flex-col items-center justify-center p-8 rounded-2xl rotate-y-180 backface-hidden shadow-lg">
+                                        <div class="overflow-y-auto max-h-full fade-in">
+                                            <p class="text-center text-base font-medium font-montserrat leading-relaxed tracking-wide text-shadow-sm">"Dedicated to inspiring students and fostering innovation through education."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                    <!-- Indicator Dots -->
+                    <div class="flex justify-center mt-6 space-x-3" id="carousel-dots">
+                        <!-- Dots will be added by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+                <!-- Members Section -->
+            <section class="mb-16 text-center">
+                <h2 class="text-5xl md:text-7xl font-extrabold not-italic tracking-wider text-gray-900 leading-tight opacity-0 hero-title">
+                    Our Members
+                </h2>
+                <div class="relative w-[90%] mx-auto overflow-hidden" id="carousel-container">
+                    <div class="flex space-x-8 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-4 py-6" id="members-container">
+                        <% members.forEach((mem) => { %>
+                            <% if (mem.teacher) return; %>
+                            <div class="relative flex-shrink-0 w-80 h-96 snap-center perspective">
+                                <div class="relative w-full h-full card-3d shadow-xl rounded-2xl hover:scale-105" onclick="flipMemberCard(this)" data-flipped="false">
+                                    <!-- Front Side -->
+                                    <div class="absolute inset-0 w-full h-full backface-hidden overflow-hidden rounded-2xl bg-white">
+                                        <!-- Full card image -->
+                                        <div class="w-full h-full relative">
+                                            <img src="<%= mem.photo %>" alt="<%= mem.name %>" class="w-full h-full object-cover">
+                                            <!-- Overlay with name and designation -->
+                                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+                                                <h3 class="text-xl font-bold uppercase font-montserrat leading-tight tracking-wide"><%= mem.name %></h3>
+                                                <p class="text-gray-200 text-sm italic font-light tracking-wider mt-1"><%= mem.post %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Back Side -->
+                                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 text-white flex flex-col items-center justify-center p-8 rounded-2xl rotate-y-180 backface-hidden shadow-lg">
+                                        <div class="overflow-y-auto max-h-full fade-in">
+                                            <p class="text-center text-base font-medium font-montserrat leading-relaxed tracking-wide text-shadow-sm">"Passionate about learning and contributing to our community's growth and success."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                    <!-- Indicator Dots -->
+                    <div class="flex justify-center mt-6 space-x-3" id="members-dots">
+                        <!-- Dots will be added by JavaScript -->
+                    </div>
+                </div>
+            </section>
+            <!-- Members Section Style -->
+            <style>
+                /* Apple-like styling */
+                .perspective {
+                    perspective: 1000px;
+                }
+                
+                .card-3d {
+                    transform-style: preserve-3d;
+                    transition: transform 0.5s ease;
+                }
+                
+                .backface-hidden {
+                    backface-visibility: hidden;
+                }
+                
+                .rotate-y-180 {
+                    transform: rotateY(180deg);
+                }
+                
+                /* Smooth scrolling */
+                #members-container {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                    scroll-behavior: smooth;
+                    cursor: grab;
+                }
+                
+                #members-container:active {
+                    cursor: grabbing;
+                }
+                
+                #members-container::-webkit-scrollbar {
+                    display: none;
+                }
+                
+                /* Card styling */
+                #members-container .card-3d {
+                    cursor: pointer;
+                    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+                }
+                
+                /* Separate transitions for hover and flip */
+                .hover\:scale-105 {
+                    transition: transform 0.3s ease;
+                }
+                
+                /* Override for flipped cards */
+                .card-3d.rotate-y-180 {
+                    transform: rotateY(180deg);
+                }
+                
+                /* Text shadow for better readability */
+                .text-shadow-sm {
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                }
+                
+                /* Animation for auto-scrolling */
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
+                
+                /* Fade-in animation for back side */
+                .fade-in {
+                    animation: fadeIn 0.2s ease-in;
+                }
+                
+                @keyframes fadeIn {
+                    0% { opacity: 0; }
+                    100% { opacity: 1; }
+                }
+                
+                /* Apple-like indicator dots */
+                #members-dots button {
+                    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                }
+                
+                #members-dots button.active {
+                    background-color: #1a202c;
+                    transform: scale(1.3);
+                }
+            </style>
+            <!-- Members Section Script -->
+            <script>
+                // Get all member cards and calculate the total number
+                const membersContainer = document.getElementById('members-container');
+                const carouselContainer = document.getElementById('carousel-container');
+                const memberCards = Array.from(membersContainer.querySelectorAll('.snap-center'));
+                const memberDotsContainer = document.getElementById('members-dots');
+                let currentMemberIndex = 0;
+                let autoScrollInterval;
+                let startX, startScrollLeft, isDown = false;
+                
+                // Create indicator dots with Apple-like styling
+                memberCards.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.className = h-3 w-3 rounded-full transition-all duration-300 ${index === 0 ? 'bg-gray-800 scale-125 active' : 'bg-gray-400'};
+                    dot.onclick = () => goToMemberCard(index);
+                    memberDotsContainer.appendChild(dot);
+                });
+                
+                // Function to flip member card with animation when clicked
+                function flipMemberCard(card) {
+                    // Stop auto-scroll while card is flipped
+                    clearInterval(autoScrollInterval);
+                    
+                    // Stop event propagation to prevent carousel movement
+                    event.stopPropagation();
+                    
+                    if (card.dataset.flipped === "false") {
+                        // Apply the rotation transform immediately
+                        card.classList.add("rotate-y-180");
+                        card.dataset.flipped = "true";
+                        
+                        // Auto flip back after 3 seconds
+                        setTimeout(() => {
+                            card.classList.remove("rotate-y-180");
+                            card.dataset.flipped = "false";
+                            
+                            // Resume auto-scroll after card flips back
+                            startAutoScroll();
+                        }, 3000);
+                    } else {
+                        // Allow user to flip back manually before the timeout
+                        card.classList.remove("rotate-y-180");
+                        card.dataset.flipped = "false";
+                        
+                        // Resume auto-scroll
+                        startAutoScroll();
+                    }
+                }
+                
+                // Function to go to a specific member card
+                function goToMemberCard(index) {
+                    // Clear auto-scroll when manually navigating
+                    clearInterval(autoScrollInterval);
+                    
+                    currentMemberIndex = index;
+                    memberCards[currentMemberIndex].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                    
+                    // Update indicator dots
+                    updateMemberDots();
+                    
+                    // Restart auto-scroll after manual navigation
+                    startAutoScroll();
+                }
+                
+                // Update the active dot with Apple-like animation
+                function updateMemberDots() {
+                    const dots = Array.from(memberDotsContainer.children);
+                    dots.forEach((dot, index) => {
+                        if (index === currentMemberIndex) {
+                            dot.classList.remove('bg-gray-400');
+                            dot.classList.add('bg-gray-800', 'scale-125', 'active');
+                        } else {
+                            dot.classList.remove('bg-gray-800', 'scale-125', 'active');
+                            dot.classList.add('bg-gray-400');
+                        }
+                    });
+                }
+                
+                // Function to automatically scroll the carousel
+                function startAutoScroll() {
+                    // Clear any existing interval
+                    clearInterval(autoScrollInterval);
+                    
+                    // Set up auto-scroll
+                    autoScrollInterval = setInterval(() => {
+                        if (currentMemberIndex < memberCards.length - 1) {
+                            currentMemberIndex++;
+                        } else {
+                            currentMemberIndex = 0;
+                        }
+                        
+                        memberCards[currentMemberIndex].scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest',
+                            inline: 'center'
+                        });
+                        
+                        updateMemberDots();
+                    }, 4000); // Auto-scroll every 4 seconds
+                }
+                
+                // Handle scroll events to update dots
+                membersContainer.addEventListener('scroll', () => {
+                    const containerRect = membersContainer.getBoundingClientRect();
+                    const center = containerRect.left + containerRect.width / 2;
+                    
+                    // Find the card closest to the center
+                    let closestCard = null;
+                    let closestDistance = Infinity;
+                    
+                    memberCards.forEach((card, index) => {
+                        const cardRect = card.getBoundingClientRect();
+                        const cardCenter = cardRect.left + cardRect.width / 2;
+                        const distance = Math.abs(center - cardCenter);
+                        
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
+                            closestCard = card;
+                            currentMemberIndex = index;
+                        }
+                    });
+                    
+                    updateMemberDots();
+                });
+                
+                // Mouse/Touch events for swipe functionality
+                
+                // Mouse Down
+                membersContainer.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    membersContainer.classList.add('active');
+                    startX = e.pageX - membersContainer.offsetLeft;
+                    startScrollLeft = membersContainer.scrollLeft;
+                    clearInterval(autoScrollInterval);
+                });
+                
+                // Mouse Leave
+                membersContainer.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    membersContainer.classList.remove('active');
+                    startAutoScroll();
+                });
+                
+                // Mouse Up
+                membersContainer.addEventListener('mouseup', () => {
+                    isDown = false;
+                    membersContainer.classList.remove('active');
+                    
+                    // Snap to nearest card after swipe
+                    memberCards[currentMemberIndex].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                    
+                    startAutoScroll();
+                });
+                
+                // Mouse Move for dragging
+                membersContainer.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - membersContainer.offsetLeft;
+                    const walk = (x - startX) * 2; // Scroll speed multiplier
+                    membersContainer.scrollLeft = startScrollLeft - walk;
+                });
+                
+                // Touch events for mobile swipe
+                
+                // Touch Start
+                membersContainer.addEventListener('touchstart', (e) => {
+                    isDown = true;
+                    membersContainer.classList.add('active');
+                    startX = e.touches[0].pageX - membersContainer.offsetLeft;
+                    startScrollLeft = membersContainer.scrollLeft;
+                    clearInterval(autoScrollInterval);
+                });
+                
+                // Touch End
+                membersContainer.addEventListener('touchend', () => {
+                    isDown = false;
+                    membersContainer.classList.remove('active');
+                    
+                    // Snap to nearest card after swipe
+                    memberCards[currentMemberIndex].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
+                    
+                    startAutoScroll();
+                });
+                
+                // Touch Move
+                membersContainer.addEventListener('touchmove', (e) => {
+                    if (!isDown) return;
+                    const x = e.touches[0].pageX - membersContainer.offsetLeft;
+                    const walk = (x - startX) * 2;
+                    membersContainer.scrollLeft = startScrollLeft - walk;
+                });
+                
+                // Initial setup on page load
+                window.addEventListener('load', () => {
+                    if (memberCards.length > 0) {
+                        // Initial position
+                        memberCards[0].scrollIntoView({
+                            block: 'nearest',
+                            inline: 'center'
+                        });
+                        
+                        // Add initial animation to the first card
+                        setTimeout(() => {
+                            memberCards[0].querySelector('.card-3d').style.animation = 'pulse 1.2s ease-out';
+                            setTimeout(() => {
+                                memberCards[0].querySelector('.card-3d').style.animation = '';
+                            }, 1200);
+                        }, 500);
+                        
+                        // Start auto-scroll
+                        startAutoScroll();
+                    }
+                });
+            </script>
+        </div>
+    </main>    
+            <!-- Teachers Section Style -->
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+                
+                h2{
+                    /* color: linear-gradient(#3b82f6, #a855f7); */
+                    background: linear-gradient(#3b82f6, #a855f7);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+                }
+
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+                .perspective {
+                    perspective: 1500px;
+                }
+                .preserve-3d {
+                    transform-style: preserve-3d;
+                }
+                .backface-hidden {
+                    backface-visibility: hidden;
+                }
+                .rotate-y-180 {
+                    transform: rotateY(180deg);
+                }
+                .line-clamp-1 {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+                .line-clamp-2 {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+                .text-shadow {
+                    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+                }
+                .text-shadow-sm {
+                    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+                }
+                .fade-in {
+                    animation: fadeIn 0.8s ease-in-out;
+                }
+                
+                @keyframes fadeIn {
+                    0% { opacity: 0; transform: translateY(10px); }
+                    100% { opacity: 1; transform: translateY(0); }
+                }
+                
+                @keyframes pulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); }
+                }
+                
+                .hover\:scale-105:hover {
+                    transform: scale(1.05);
+                    transition-duration: 450ms;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                }
+            </style>
+            <!-- Teachers Section Script -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Get all cards and calculate the total number
+                    const carouselContainer = document.getElementById('carousel-container');
+                    const cards = Array.from(carouselContainer.querySelectorAll('.snap-center'));
+                    const dotsContainer = document.getElementById('carousel-dots');
+                    let currentIndex = 0;
+                    
+                    // Touch handling variables
+                    let touchStartX = 0;
+                    let touchEndX = 0;
+                    let isSwiping = false;
+                    const swipeThreshold = 10; // Pixels of movement to consider it a swipe
+                    
+                    // Create indicator dots with enhanced styling
+                    cards.forEach((_, index) => {
+                        const dot = document.createElement('button');
+                        dot.className = `h-3 w-3 rounded-full transition-all duration-300 ${index === 0 ? 'bg-gray-800 scale-125' : 'bg-gray-400'}`;
+                        dot.onclick = () => goToCard(index);
+                        dotsContainer.appendChild(dot);
+                    });
+                    
+                    // Add click handlers to all card elements
+                    cards.forEach(card => {
+                        const cardElement = card.querySelector('.preserve-3d');
+                        
+                        // Add click event listeners to handle card flipping
+                        cardElement.addEventListener('click', function(e) {
+                            // Only flip if not in the middle of a swipe action
+                            if (!isSwiping) {
+                                flipCard(this);
+                            }
+                            e.stopPropagation(); // Prevent event bubbling
+                        });
+                        
+                        // Prevent click events from bubbling when swiping
+                        cardElement.addEventListener('touchstart', function(e) {
+                            isSwiping = false;
+                        });
+                    });
+                    
+                    // Function to flip card with enhanced animations
+                    function flipCard(card) {
+                        if (card.dataset.flipped === "false") {
+                            card.classList.add("rotate-y-180");
+                            card.dataset.flipped = "true";
+                            
+                            // Auto flip back after 3 seconds
+                            setTimeout(() => {
+                                card.classList.remove("rotate-y-180");
+                                card.dataset.flipped = "false";
+                            }, 3000);
+                        }
+                    }
+                    
+                    // Function to go to a specific card
+                    function goToCard(index) {
+                        currentIndex = index;
+                        cards[currentIndex].scrollIntoView({
+                            behavior: 'smooth', 
+                            block: 'nearest',
+                            inline: 'center'
+                        });
+                        
+                        // Update indicator dots
+                        updateDots();
+                        
+                        // Animate the selected card
+                        animateCurrentCard();
+                    }
+                    
+                    // Update the active dot with animation
+                    function updateDots() {
+                        const dots = Array.from(dotsContainer.children);
+                        dots.forEach((dot, index) => {
+                            if (index === currentIndex) {
+                                dot.classList.remove('bg-gray-400');
+                                dot.classList.add('bg-gray-800', 'scale-125');
+                            } else {
+                                dot.classList.remove('bg-gray-800', 'scale-125');
+                                dot.classList.add('bg-gray-400');
+                            }
+                        });
+                    }
+                    
+                    // Animate the current card
+                    function animateCurrentCard() {
+                        cards.forEach((card, index) => {
+                            if (index === currentIndex) {
+                                const cardElement = card.querySelector('.preserve-3d');
+                                cardElement.style.animation = 'pulse 0.8s ease-out';
+                                setTimeout(() => {
+                                    cardElement.style.animation = '';
+                                }, 800);
+                            }
+                        });
+                    }
+                    
+                    // Add touch event listeners for swipe
+                    carouselContainer.addEventListener('touchstart', function(e) {
+                        touchStartX = e.changedTouches[0].screenX;
+                    }, { passive: true });
+                    
+                    carouselContainer.addEventListener('touchmove', function(e) {
+                        // Detect if user is moving finger significantly (swiping)
+                        if (Math.abs(e.changedTouches[0].screenX - touchStartX) > swipeThreshold) {
+                            isSwiping = true;
+                        }
+                    }, { passive: true });
+                    
+                    carouselContainer.addEventListener('touchend', function(e) {
+                        touchEndX = e.changedTouches[0].screenX;
+                        handleSwipe();
+                        
+                        // Reset swiping flag after a short delay to allow click events
+                        setTimeout(() => {
+                            isSwiping = false;
+                        }, 50);
+                    }, { passive: true });
+                    
+                    // Handle swipe direction
+                    function handleSwipe() {
+                        const minSwipeDistance = 50;
+                        const swipeDistance = touchEndX - touchStartX;
+                        
+                        if (swipeDistance > minSwipeDistance && currentIndex > 0) {
+                            // Swipe right, go to previous card
+                            goToCard(currentIndex - 1);
+                        } else if (swipeDistance < -minSwipeDistance && currentIndex < cards.length - 1) {
+                            // Swipe left, go to next card
+                            goToCard(currentIndex + 1);
+                        }
+                    }
+                    
+                    // Handle scroll events to update dots
+                    carouselContainer.addEventListener('scroll', function() {
+                        const containerRect = carouselContainer.getBoundingClientRect();
+                        const center = containerRect.left + containerRect.width / 2;
+                        
+                        // Find the card closest to the center
+                        let closestCard = null;
+                        let closestDistance = Infinity;
+                        
+                        cards.forEach((card, index) => {
+                            const cardRect = card.getBoundingClientRect();
+                            const cardCenter = cardRect.left + cardRect.width / 2;
+                            const distance = Math.abs(center - cardCenter);
+                            
+                            if (distance < closestDistance) {
+                                closestDistance = distance;
+                                closestCard = card;
+                                currentIndex = index;
+                            }
+                        });
+                        
+                        updateDots();
+                    });
+                    
+                    // Add mouse wheel support for horizontal scrolling
+                    carouselContainer.addEventListener('wheel', function(e) {
+                        if (e.deltaY !== 0) {
+                            e.preventDefault();
+                            carouselContainer.scrollLeft += e.deltaY;
+                        }
+                    }, { passive: false });
+                    
+                    // Initial scroll to first card to ensure proper positioning
+                    if (cards.length > 0) {
+                        cards[0].scrollIntoView({
+                            block: 'nearest',
+                            inline: 'center'
+                        });
+                        
+                        // Add initial animation to the first card
+                        setTimeout(() => {
+                            const firstCard = cards[0].querySelector('.preserve-3d');
+                            firstCard.style.animation = 'pulse 1.2s ease-out';
+                            setTimeout(() => {
+                                firstCard.style.animation = '';
+                            }, 1200);
+                        }, 500);
+                    }
+                });
+            </script>
 
     <!-- Vision Section -->
-    <section class="py-16 px-4 lg:px-8 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Our Vision</h2>
+    <section class="py-16 px-4 lg:px-8 bg-transparent from-gray-100 to-gray-300">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-5xl md:text-7xl font-extrabold not-italic tracking-wider text-gray-900 leading-tight opacity-0 hero-title">
+                Our Vision
+            </h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4">Face Challenges</h3>
-                    <p class="text-gray-600">The PICSEL committee envisions empowering engineering students to confidently navigate the challenges encountered throughout their academic journey.</p>
+                <div class="relative overflow-hidden bg-gray-200 p-8 rounded-xl shadow-lg transition-transform transform hover:-translate-y-2 vision-box">
+                    <div class="absolute inset-0 bg-gradient-to-r from-gray-300 to-gray-400 opacity-10"></div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 relative z-10">Embracing Challenges</h3>
+                    <p class="text-gray-700 relative z-10">Empowering the next generation to break barriers, solve complex problems, and shape the future.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4">Culture of Innovation</h3>
-                    <p class="text-gray-600">The PICSEL committee aims to foster a culture of innovation among students by providing opportunities for research, idea exploration, and peer collaboration.</p>
+                <div class="relative overflow-hidden bg-gray-200 p-8 rounded-xl shadow-lg transition-transform transform hover:-translate-y-2 vision-box">
+                    <div class="absolute inset-0 bg-gradient-to-r from-gray-300 to-gray-400 opacity-10"></div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 relative z-10">Innovate Fearlessly</h3>
+                    <p class="text-gray-700 relative z-10">Driving a culture of boundless creativity, deep exploration, and disruptive breakthroughs.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4">Diversity</h3>
-                    <p class="text-gray-600">The PICSEL committee is dedicated to promoting inclusivity within the student community. Our vision is to cultivate an environment where students from all backgrounds thrive and feel valued and included.</p>
+                <div class="relative overflow-hidden bg-gray-200 p-8 rounded-xl shadow-lg transition-transform transform hover:-translate-y-2 vision-box">
+                    <div class="absolute inset-0 bg-gradient-to-r from-gray-300 to-gray-400 opacity-10"></div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 relative z-10">Unity in Diversity</h3>
+                    <p class="text-gray-700 relative z-10">Creating an inclusive ecosystem where every voice matters and innovation thrives.</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Members Section -->
-    <section class="py-16 px-4 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-12">Our Teachers</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <%members.forEach((mem) => { %>
-                    <%if(!mem.teacher) return;%>
-                    <%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
-                <%})%>
-            </div>
-            
-            <h2 class="text-3xl font-bold text-center mt-16 mb-12">Our Members</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <%members.forEach((mem) => { %>
-                    <%if(mem.teacher) return;%>
-                    <%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
-                <%})%>
-            </div>
-        </div>
-    </section>
-
+    
     <%- include('partials/footer') %>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+        <!-- GSAP Animations -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        gsap.to('.hero-title', { opacity: 1, y: -20, duration: 1, ease: "power2.out" });
+        gsap.to('.hero-desc', { opacity: 1, y: -20, delay: 0.3, duration: 1, ease: "power2.out" });
+        gsap.to('.hero-btn', { opacity: 1, y: -10, delay: 0.6, duration: 1, ease: "power2.out" });
+        gsap.to('.hero-images', { opacity: 1, y: -10, delay: 0.8, duration: 1, ease: "power2.out" });
+
+        // Features Animation
+        gsap.to('.feature-cards', {
+            scrollTrigger: { trigger: '.feature-cards', start: "top 80%" },
+            opacity: 1,
+            y: -20,
+            duration: 1.5,
+            ease: "power2.out"
+        });
+
+        gsap.utils.toArray('.feature-item').forEach((item, i) => {
+            gsap.to(item, {
+                scrollTrigger: { trigger: item, start: "top 85%" },
+                opacity: 1,
+                scale: 1,
+                duration: 1,
+                delay: i * 0.2,
+                ease: "power2.out"
+            });
+        });
+    </script>
+    <!-- Image Floating Script -->
     <script>
         gsap.registerPlugin(ScrollTrigger);
         gsap.fromTo('.hero-slider',{
@@ -180,6 +1097,61 @@
             }).then(res=>res.json());
             alert(result.message);
         }
+    </script>
+    <!-- TimeLIne Script -->
+    <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+        // Glowing Timeline Animation
+        gsap.to(".timeline-glow::before", {
+            top: "100%",
+            repeat: -1,
+            yoyo: true,
+            duration: 3,
+            ease: "power1.inOut"
+        });
+
+        // Feature Cards Fade-in
+        gsap.utils.toArray('.feature-item').forEach((item, i) => {
+            gsap.from(item, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                delay: i * 0.2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%",
+                }
+            });
+        });
+
+
+    </script>
+    <!-- Our Vision Script -->
+    <script>
+        function typewriterEffect(element, text, delay = 20) {
+            element.innerHTML = "";
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, delay);
+                }
+            }
+            type();
+        }
+    
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".vision-text").forEach((el, index) => {
+                let originalText = el.innerText;
+                el.innerText = ""; // Clear text
+                setTimeout(() => {
+                    typewriterEffect(el, originalText, 30); // Start typewriter effect
+                }, index * 1000); // Add delay for each box
+            });
+        });
     </script>
 </body>
 </html>

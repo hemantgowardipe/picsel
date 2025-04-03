@@ -1,72 +1,107 @@
-<nav class="bg-white shadow-md">
+<nav class="bg-gray-300 text-black relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <!-- Logo -->
-            <div class="flex-shrink-0 flex items-center">
-                <a href="/" class="text-2xl font-bold text-blue-600">PICSEL</a>
+        <!-- Logo Area - positioned within the navbar height -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 top-0 h-20 w-40 bg-transparent z-10 flex items-center justify-center">
+            <!-- Logo positioned in white background area -->
+            <div class="relative z-10 flex items-center justify-center h-full w-full">
+                <a href="/"><img class="w-40px h-auto" src="/logo.png" alt="Logo" class="h-12 object-contain"></a>
             </div>
-
-            <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="/members" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Members</a>
-                
-                <!-- Events Dropdown -->
-                <div class="relative group">
-                    <button class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                        Events
-                        <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                        <div class="py-1">
-                            <a href="/upevent" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Upcoming Events</a>
-                            <a href="/prevevent" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Previous Events</a>
+        </div>
+        
+        <div class="flex justify-between h-20">
+            <!-- Left Navigation with right border stopping at logo -->
+            <div class="flex items-center flex-1 justify-start mr-20">
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/members" class="text-black hover:text-cyan-400 px-3 py-2 text-sm uppercase tracking-wider font-light transition-colors duration-300">Members</a>
+                    
+                    <!-- Events Dropdown -->
+                    <div class="relative group">
+                        <button class="text-black hover:text-cyan-400 px-3 py-2 text-sm uppercase tracking-wider font-light transition-colors duration-300 flex items-center">
+                            Events
+                            <svg class="inline-block w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-1 w-48 bg-gray-300 border border-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 z-20">
+                            <div class="py-1">
+                                <a href="/upevent" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 hover:bg-gray-900 uppercase tracking-wider font-light transition-colors duration-300">Upcoming Events</a>
+                                <a href="/prevevent" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 hover:bg-gray-900 uppercase tracking-wider font-light transition-colors duration-300">Previous Events</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Admin Dropdown -->
-                <div class="relative group">
-                    <button class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
-                        Admin
-                        <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                        <div class="py-1">
-                            <a href="/admin/addevent" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Add Event</a>
-                            <a href="/admin/addmember" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Add Member</a>
+            </div>
+            
+            <!-- Right Navigation with left border stopping at logo -->
+            <div class="flex items-center flex-1 justify-end ml-20">
+                <div class="hidden md:flex items-center space-x-6">
+                    <!-- Admin Dropdown -->
+                    <div class="relative group" id="nav-admin">
+                        <button class="text-black hover:text-cyan-400 px-3 py-2 text-sm uppercase tracking-wider font-light transition-colors duration-300 flex items-center">
+                            Admin
+                            <svg class="inline-block w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute right-0 mt-1 w-48 bg-gray-300 border border-gray-800 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 z-20">
+                            <div class="py-1">
+                                <a href="/admin/addevent" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 hover:bg-gray-900 uppercase tracking-wider font-light transition-colors duration-300">Add Event</a>
+                                <a href="/admin/addmember" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 hover:bg-gray-900 uppercase tracking-wider font-light transition-colors duration-300">Add Member</a>
+                            </div>
                         </div>
                     </div>
+
+                    <a href="/about" class="text-black hover:text-cyan-400 px-3 py-2 text-sm uppercase tracking-wider font-light transition-colors duration-300">About</a>
+                    <a href="/admin/login" id="nav-login" class="text-black hover:text-cyan-400 px-3 py-2 text-sm uppercase tracking-wider font-light transition-colors duration-300">Login</a>
                 </div>
 
-                <a href="/about" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</a>
-                <a href="/admin/login" id="login" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Login</a>
-            </div>
-
-            <!-- Mobile menu button -->
-            <div class="md:hidden flex items-center">
-                <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-black hover:text-cyan-400 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Mobile menu -->
-    <div class="mobile-menu hidden md:hidden">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/members" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Members</a>
-            <a href="/upevent" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Upcoming Events</a>
-            <a href="/prevevent" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Previous Events</a>
-            <a href="/admin/addevent" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Add Event</a>
-            <a href="/admin/addmember" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Add Member</a>
-            <a href="/about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">About</a>
-            <a href="/admin/login" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100">Login</a>
+    <div class="mobile-menu hidden md:hidden border-t border-gray-800">
+        <div class="px-2 py-4 space-y-2">
+            <a href="/members" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 uppercase tracking-wider font-light transition-colors duration-300">Members</a>
+            
+            <!-- Mobile Events Dropdown -->
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-button w-full text-left flex justify-between items-center px-4 py-3 text-sm text-black hover:text-cyan-400 uppercase tracking-wider font-light transition-colors duration-300">
+                    Events
+                    <svg class="w-4 h-4 ml-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="mobile-dropdown-content hidden pl-4 border-l border-gray-800 ml-4">
+                    <a href="/upevent" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 uppercase tracking-wider font-light transition-colors duration-300">Upcoming Events</a>
+                    <a href="/prevevent" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 uppercase tracking-wider font-light transition-colors duration-300">Previous Events</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Admin Dropdown -->
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-button w-full text-left flex justify-between items-center px-4 py-3 text-sm text-black hover:text-cyan-400 uppercase tracking-wider font-light transition-colors duration-300">
+                    Admin
+                    <svg class="w-4 h-4 ml-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="mobile-dropdown-content hidden pl-4 border-l border-gray-800 ml-4">
+                    <a href="/admin/addevent" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 uppercase tracking-wider font-light transition-colors duration-300">Add Event</a>
+                    <a href="/admin/addmember" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 uppercase tracking-wider font-light transition-colors duration-300">Add Member</a>
+                </div>
+            </div>
+            
+            <a href="/about" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 uppercase tracking-wider font-light transition-colors duration-300">About</a>
+            <a href="/admin/login" class="block px-4 py-3 text-sm text-black hover:text-cyan-400 uppercase tracking-wider font-light transition-colors duration-300">Login</a>
         </div>
     </div>
 </nav>
@@ -79,6 +114,18 @@
     mobileMenuButton.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
     });
+    
+    // Mobile dropdowns
+    const mobileDropdownButtons = document.querySelectorAll('.mobile-dropdown-button');
+    
+    mobileDropdownButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const content = button.nextElementSibling;
+            content.classList.toggle('hidden');
+            const icon = button.querySelector('svg');
+            icon.classList.toggle('rotate-180');
+        });
+    });
 
     async function authcheck(){
         const response = await fetch('/api/authcheck');
@@ -87,8 +134,8 @@
         if(data.status){
             document.getElementById('login').innerHTML = 'Logout';
             document.getElementById('login').href = '/api/logout';
-            document.getElementById('login').style.backgroundColor = 'red';
-            document.getElementById('login').style.color = 'white';
+            document.getElementById('login').classList.add('bg-cyan-500', 'hover:bg-cyan-600');
+            document.getElementById('login').classList.remove('text-gray-300', 'hover:text-cyan-400');
         }
     }
     authcheck();

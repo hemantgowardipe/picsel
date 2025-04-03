@@ -5,48 +5,603 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="This is the members page of PICSEL">
     <title>PICSEL 2025</title>
- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Apply Poppins Font */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #f3e8ff, #fff);
+            min-height: 100vh;
+        }
+
+        /* Section Heading with Hover Effect */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: #4f46e5;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, rgba(79, 70, 229, 0.8), rgba(236, 72, 153, 0.8));
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        .section-title:hover {
+            transform: scale(1.05);
+            text-shadow: 0px 0px 8px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Card Design with Purple Tint & Glass Effect */
+        .glass-card {
+            background: rgba(243, 232, 255, 0.8); /* Light purple tint */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 15px;
+            border: 2px solid rgba(79, 70, 229, 0.3);
+            transition: all 0.4s ease-in-out;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.1);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Hover Effect */
+        .glass-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+            border: 2px solid rgba(236, 72, 153, 0.4);
+        }
+
+        /* Profile Image Effects */
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 2px solid transparent;
+        }
+
+        .glass-card:hover .profile-img {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            border: 2px solid rgba(236, 72, 153, 0.4);
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            .glass-card {
+                padding: 1.5rem;
+            }
+            .profile-img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
-    <%-include('partials/navbar')%>
+<body>
+
+    <%- include('partials/navbar') %>
+    
 
     <!-- Members Section -->
     <main class="flex-grow py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
             <!-- Teachers Section -->
-            <section class="mb-16">
-                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Our Teachers</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <%members.forEach((mem) => { %>
-                        <%if(!mem.teacher) return;%>
-                        <%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
-                    <%})%>
-                </div>
-            </section>
+            <!-- Teachers Section -->
+<section class="mb-16">
+    <h2 class="section-title">Our Teachers</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <% members.forEach((mem, index) => { %>
+            <% if (!mem.teacher) return; %>
+            <div class="glass-card animate-fadeIn duration-700 delay-<%= index * 100 %>">
 
-            <!-- Student Members Section -->
-            <section>
-                <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Our Members</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <%members.forEach((mem) => { %>
-                        <%if(mem.teacher) return;%>
-                        <%- include('partials/card',{name:mem.name,details:mem.post,poster:mem.photo,id:'na',na:mem.id}) %>
-                    <%})%>
-                </div>
-            </section>
+                <!-- Profile Image -->
+                <img src="<%= mem.photo %>" alt="Teacher" class="profile-img">
+
+                <!-- Name -->
+                <h3 class="mt-4 text-2xl font-semibold text-gray-900"><%= mem.name %></h3>
+
+                <!-- Post -->
+                <p class="text-gray-600 text-lg mt-2"><%= mem.post %></p>
+            </div>
+        <% }) %>
+    </div>
+</section>
+
+            <!-- Members Section -->
+<section class="py-16 px-6 relative">
+    <h2 class="text-5xl font-extrabold text-center text-gray-900 mb-12">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">
+            Our Members
+        </span>
+    </h2>
+
+    <!-- Members Grid -->
+    <div id="members-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Member Cards -->
+        <div class="glass-card member-item Core-Committee">
+            <img src="president.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Harsharan Singh Arjani</h3>
+            <p class="text-gray-600 text-lg mt-2">PRESIDENT</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="vice_president.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Agraja Kawale</h3>
+            <p class="text-gray-600 text-lg mt-2">VICE PRESIDENT</p>
+        </div>
+
+        <div class="glass-card member-item Core-Committee">
+            <img src="secratary.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Pratham Munnarwar</h3>
+            <p class="text-gray-600 text-lg mt-2">SECRATORY</p>
+        </div>
+
+        <div class="glass-card member-item Core-Committee">
+            <img src="Joint_Secratary.png" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Osho Sharma</h3>
+            <p class="text-gray-600 text-lg mt-2">JOINT SECRATORY</p>
+        </div>
+
+        <div class="glass-card member-item Core-Committee">
+            <img src="Akshay Rathod.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Akshay Rathod</h3>
+            <p class="text-gray-600 text-lg mt-2">TREASURER </p>
+        </div>
+        
+        <div class="glass-card member-item Core-Committee">
+            <img src="Tech_Mag_Head.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Prajwal Sakhale</h3>
+            <p class="text-gray-600 text-lg mt-2">TECH-MAG HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="website_head2.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Aman Dhanorkar</h3>
+            <p class="text-gray-600 text-lg mt-2">WEBSITE HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="website_head1.png" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Suraj Moon</h3>
+            <p class="text-gray-600 text-lg mt-2">WEBSITE HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="Event_Head1.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Shweta Shinde</h3>
+            <p class="text-gray-600 text-lg mt-2">EVENT HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="Event_Head2.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Janvhi Sable</h3>
+            <p class="text-gray-600 text-lg mt-2">EVENT HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Kunal Gawande</h3>
+            <p class="text-gray-600 text-lg mt-2">EVENT HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="Decoration_Head..jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Nandini Bhosale</h3>
+            <p class="text-gray-600 text-lg mt-2">DECORATION HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Tanvi Kanoje</h3>
+            <p class="text-gray-600 text-lg mt-2">DECORATION HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="food_head.png" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Harsh Bhawalkar</h3>
+            <p class="text-gray-600 text-lg mt-2">FOOD HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="sponsorship_head.png" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Nisarga Jawale</h3>
+            <p class="text-gray-600 text-lg mt-2">SPONSORSHIP HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Jeswin George</h3>
+            <p class="text-gray-600 text-lg mt-2">SPORTS HEAD</p>
+        </div>
+        <div class="glass-card member-item Core-Committee">
+            <img src="sport_head.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Aryan Warjurkar</h3>
+            <p class="text-gray-600 text-lg mt-2">SPORTS HEAD</p>
+        </div>
+
+        <div class="glass-card member-item Core-Committee">
+            <img src="Asst_Secretory.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Amartya Choubey  </h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. SECRETARY </p>
+        </div>
+
+        <div class="glass-card member-item Core-Committee">
+            <img src="Asst_Joint_Secratary.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Asmita Meshram</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. JOINT SECRETARY </p>
+        </div>
+
+
+
+
+        <!-- Website Team -->
+        <div class="glass-card member-item Website-Team">
+            <img src="website_head1.png" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Suraj Moon</h3>
+            <p class="text-gray-600 text-lg mt-2">WEBSITE HEAD</p>
+        </div>
+        <div class="glass-card member-item Website-Team">
+            <img src="website_head2.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Aman Dhanorkar</h3>
+            <p class="text-gray-600 text-lg mt-2">WEBSITE HEAD</p>
+        </div>
+        <div class="glass-card member-item Website-Team">
+            <img src="Asst_Web_Head1.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Aniket Dhakate</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. WEBSITE HEAD</p>
+        </div>
+        <div class="glass-card member-item Website-Team">
+            <img src="Asst_Web_Head2.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Ritish Das</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. WEBSITE HEAD</p>
+        </div>
+        <div class="glass-card member-item Website-Team">
+            <img src="Asst_Web_Head3.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Hemant Gowardipe</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. WEBSITE HEAD</p>
+        </div>
+        <div class="glass-card member-item Website-Team">
+            <img src="Asst_Web_Head4.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Gaurav Deskmukh</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. WEBSITE HEAD</p>
+        </div>
+        <div class="glass-card member-item Website-Team">
+            <img src="Asst_Web_Head5.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Rasika Pande</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. WEBSITE HEAD</p>
+        </div>
+
+        <!-- TechMag Team -->
+        <div class="glass-card member-item TechMag-Team">
+            <img src="Tech_Mag_Head.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Prajwal Sakhale</h3>
+            <p class="text-gray-600 text-lg mt-2">TECH-MAG HEAD</p>
+        </div>
+        <div class="glass-card member-item TechMag-Team">
+            <img src="Asst_Tech_Mag1.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Tanushree Patle</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. TECH-MAG HEAD</p>
+        </div>
+        <div class="glass-card member-item TechMag-Team">
+            <img src="Asst_Tech_Mag2.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Sahil Madankar</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. TECH-MAG HEAD</p>
+        </div>
+
+        <!-- Sports Team -->
+        <div class="glass-card member-item Sports-Team">
+            <img src="sport_head.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Aryan Warjurkar</h3>
+            <p class="text-gray-600 text-lg mt-2">SPORTS HEAD</p>
+        </div>
+        <div class="glass-card member-item Sports-Team">
+            <img src="Asst_Sport_head2.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Tanushree Ambhore</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. SPORTS HEAD</p>
+        </div>
+        <div class="glass-card member-item Sports-Team">
+            <img src="Asst_Sport_head1.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Tejal Bagade </h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. SPORTS HEAD</p>
+        </div>
+
+        <!-- Decoration Team -->
+        <div class="glass-card member-item Decoration-Team">
+            <img src="Decoration_Head..jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Nandini Bhosale</h3>
+            <p class="text-gray-600 text-lg mt-2">DECORATION HEAD</p>
+        </div>
+        <div class="glass-card member-item Decoration-Team">
+            <img src="Asst_Decoration_Head1.jpeg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Snehal Ninawe</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. DECORATION HEAD</p>
+        </div>
+        <div class="glass-card member-item Decoration-Team">
+            <img src="Asst_Decoration_Head2.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Twinkal Sapate </h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. DECORATION HEAD</p>
+        </div>
+        <div class="glass-card member-item Decoration-Team">
+            <img src="Asst_Decoration_Head3.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Suvidha Kusan Gurnule </h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. DECORATION HEAD</p>
+        </div>
+        <div class="glass-card member-item Decoration-Team">
+            <img src="Asst_Decoration_Head4.jpeg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Sakshi Bongirwar </h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. DECORATION HEAD</p>
+        </div>
+        <div class="glass-card member-item Decoration-Team">
+            <img src="Asst_Decoration_Head5.jpg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Amullya Dakhne</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. DECORATION HEAD</p>
+        </div>
+        <div class="glass-card member-item Decoration-Team">
+            <img src="Asst_Decoration_Head6.jpeg" alt="Member" class="profile-img">
+            <h3 class="mt-4 text-2xl font-semibold text-gray-900">Dhanashree Faye</h3>
+            <p class="text-gray-600 text-lg mt-2">Asst. DECORATION HEAD</p>
+        </div>
+
+    <!-- Event Team -->
+    <div class="glass-card member-item Event-Team">
+        <img src="Event_Head1.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Shweta Jitendra Shinde </h3>
+        <p class="text-gray-600 text-lg mt-2">EVENT HEAD</p>
+    </div>
+
+    <div class="glass-card member-item Event-Team">
+        <img src="Event_Head2.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Janvhi Sable</h3>
+        <p class="text-gray-600 text-lg mt-2">EVENT HEAD</p>
+    </div>
+
+    <div class="glass-card member-item Event-Team">
+        <img src="Asst_Event_Head1.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Amit Ramesh Ghugal </h3>
+        <p class="text-gray-600 text-lg mt-2">Asst. Event Head </p>
+    </div>
+
+    <div class="glass-card member-item Event-Team">
+        <img src="Asst_Event_Head2.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Ankit Chikhlonde</h3>
+        <p class="text-gray-600 text-lg mt-2">Asst. Event Head </p>
+    </div>
+
+    <div class="glass-card member-item Event-Team">
+        <img src="Asst_Event_Head3.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Ashwini Galhat</h3>
+        <p class="text-gray-600 text-lg mt-2">Asst. Event Head </p>
+    </div>
+
+    <div class="glass-card member-item Event-Team">
+        <img src="Asst_Event_Hea4.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Muskan Choubey </h3>
+        <p class="text-gray-600 text-lg mt-2">Asst. Event Head </p>
+    </div>
+
+    <div class="glass-card member-item Event-Team">
+        <img src="Asst_Event_Head5.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Ranoo Suresh Singh</h3>
+        <p class="text-gray-600 text-lg mt-2">Asst. Event Head </p>
+    </div>
+
+
+
+    <!-- Socila media Team -->
+    <div class="glass-card member-item Socialmedia-Team">
+        <img src="Socialmedia_Head1.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Mohit Chhatrapati Parteti </h3>
+        <p class="text-gray-600 text-lg mt-2">Social Media Head</p>
+    </div>
+    <div class="glass-card member-item Socialmedia-Team">
+        <img src="Asst_Socialmedia3.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Krishna G Thakare </h3>
+        <p class="text-gray-600 text-lg mt-2">Social Media Head</p>
+    </div>
+    <div class="glass-card member-item Socialmedia-Team">
+        <img src="Asst_Socialmedia2.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Saavi Chawke</h3>
+        <p class="text-gray-600 text-lg mt-2">Asst. Social Media Head</p>
+    </div>
+
+    <!-- Sponcership Team -->
+    <div class="glass-card member-item Sponcership-Team">
+        <img src="sponsorship_head.png" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Nisarga Jawale</h3>
+        <p class="text-gray-600 text-lg mt-2">SPONSORSHIP HEAD</p>
+    </div>
+    <div class="glass-card member-item Sponcership-Team">
+        <img src="Asst_Sponcer_Head1.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">KARAN GURUDAS  SOYAM  </h3>
+        <p class="text-gray-600 text-lg mt-2">Asst. Sponsorship Head </p>
+    </div>
+
+    <!-- Food Team -->
+    <div class="glass-card member-item Food-Team">
+        <img src="food_head.png" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Harsh Bhawalkar</h3>
+        <p class="text-gray-600 text-lg mt-2">FOOD HEAD</p>
+    </div>
+
+    <div class="glass-card member-item Food-Team">
+        <img src="Asst_food_head1.jpg" alt="Member" class="profile-img">
+        <h3 class="mt-4 text-2xl font-semibold text-gray-900">Rohit Sakharkar</h3>
+        <p class="text-gray-600 text-lg mt-2">Asst. FOOD HEAD</p>
+    </div>
+
+    </div>
+
+    <!-- Floating Category Navbar -->
+    <div class="floating-navbar ">
+        <button class="category-btn" onclick="filterMembers('Core-Committee')">Core Committee</button>
+        <button class="category-btn" onclick="filterMembers('Website-Team')">Website Team</button>
+        <button class="category-btn" onclick="filterMembers('TechMag-Team')">TechMag Team</button>
+        <button class="category-btn" onclick="filterMembers('Sports-Team')">Sports Team</button>
+        <button class="category-btn" onclick="filterMembers('Decoration-Team')">Decoration Team</button>
+        <button class="category-btn" onclick="filterMembers('Event-Team')">Event Team</button>
+        <button class="category-btn" onclick="filterMembers('Socialmedia-Team')">Social Media Team</button>
+        <button class="category-btn" onclick="filterMembers('Sponcership-Team')">Sponsorship Team</button>
+        <button class="category-btn" onclick="filterMembers('Food-Team')">Food Team</button>
+    </div>
+</section>
+
+<style>
+    /* Glass Morphism Card */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Profile Image - Boxy Style with Increased Size */
+.profile-img {
+    width: 80%; /* Increased width */
+    height: 300px; /* Increased height */
+    object-fit: cover;
+    border-radius: 15px; /* Boxy style with slightly rounded corners */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto; /* Centers the image */
+}
+
+/* Hover Effect */
+.glass-card:hover .profile-img {
+    transform: scale(1.1);
+}
+
+/* Responsive Image Sizing */
+@media (max-width: 768px) {
+    .profile-img {
+        width: 120px; /* Slightly smaller for tablets */
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-img {
+        width: 100px; /* Smaller for mobile */
+        height: 100px;
+    }
+}
+
+
+    /* Floating Category Navbar */
+    .floating-navbar {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background:transparent;
+        padding: 14px 16px;
+        border-radius: 10px;
+        display: flex;
+        gap: 12px;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        overflow-x: auto;
+        white-space: nowrap;
+        max-width: 90%;
+    }
+
+    /* Category Buttons */
+    .category-btn {
+        background: linear-gradient(to right, #8e44ad, #3498db);
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .category-btn:hover, .category-btn.active {
+        background: linear-gradient(to right, #e74c3c, #f39c12);
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Mobile-Friendly Scrollable Navbar */
+    @media (max-width: 768px) {
+        .floating-navbar {
+            display: flex;
+            justify-content: flex-start;
+            padding: 10px;
+            overflow-x: auto;
+            border-radius: 15px;
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            -ms-overflow-style: none; /* Hide scrollbar for IE & Edge */
+        }
+
+        .floating-navbar::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari */
+        }
+
+        .category-btn {
+            padding: 10px 14px;
+            font-size: 12px;
+        }
+    }
+</style>
+    <!-- Floating category script -->
+<script>
+    function filterMembers(category) {
+        let members = document.querySelectorAll('.member-item');
+        let buttons = document.querySelectorAll('.category-btn');
+
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        if (category === "All") {
+            members.forEach(member => member.style.display = "block");
+        } else {
+            members.forEach(member => {
+                member.style.display = member.classList.contains(category) ? "block" : "none";
+            });
+        }
+    }
+</script>
+
+
         </div>
     </main>
 
     <%- include('partials/footer') %>
 
-    <script>
-        async function handleDelete(id){
-            const result = await fetch(`/api/deletemember/${id}`,{
-                credentials:'include',
-                method:'delete' 
-            }).then(res=>res.json());
-            alert(result.message);
-        }
-    </script>
 </body>
 </html>
