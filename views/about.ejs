@@ -207,6 +207,35 @@
 .gallery-item:hover .image-shine {
   transform: translateX(100%) rotate(30deg);
 }
+
+.vision-box {
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Hover effect */
+    .vision-box:hover {
+        border-color: #4f46e5; /* Change border color */
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); /* Soft glow effect */
+        transform: scale(1.05); /* Slight scale effect */
+    }
+
+    /* Gradient effect on hover */
+    .vision-box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(79, 70, 229, 0.1), rgba(79, 70, 229, 0.3), rgba(79, 70, 229, 0.1));
+        transition: left 0.5s ease-in-out;
+    }
+
+    .vision-box:hover::before {
+        left: 100%;
+    }
     </style>
 </head>
 <body class="bg-white min-h-screen flex flex-col">
@@ -232,9 +261,35 @@
                         </svg>
                     </div>
                 </div>
-                <h1 class="text-4xl font-extrabold sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-cyan-200 glow-text">About <span class="text-blue-400">PICSEL</span></h1>
-                <p class="mt-4 text-xl text-black max-w-2xl mx-auto"><b>PICSel - Pioneering Innovation through Creativity & Synergy </b><br>
-                  PICSel is more than just a college committee—it’s a hub of innovation, technology, and artistic expression. As the driving force behind various technical and creative events, PICSel thrives on pushing boundaries and fostering a community where ideas turn into reality. At PICSel, we don’t just organize events—we build experiences, shaping the next generation of tech enthusiasts, developers, designers, and creators. </p>
+                <h1 class="text-4xl font-extrabold sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-cyan-200 glow-text">About <span class="text-blue-400">PICSEL</span></h1> <br>
+                <h4 class="text-2xl font-semibold not-italic tracking-wider text-gray-700 text-center"><b>PICSel - Panel In Computer Science and Engineering Learners</b><br>
+                  PICSEL is the official technical and creative department of the CSE Forum, dedicated to fostering a space where students can learn, collaborate, and showcase their skills in both technology and art.</h4>
+
+                  <br><br>
+                <h1 class="text-4xl font-extrabold sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-cyan-200 glow-text">Vision Of <span class="text-blue-400">PICSEL</span></h1> <br><br>
+                <h4 class="text-2xl font-extrabold not-italic tracking-wider text-gray-700 text-center">
+                  To Enrich People's lives with Programs that Inform, Educate and Entertain
+                </h4>
+                  <br>
+                <div class="grid md:grid-cols-3 gap-8">
+                  <div class="relative overflow-hidden bg-gray-200 p-8 rounded-xl shadow-lg transition-transform transform hover:-translate-y-2 vision-box">
+                      <div class="absolute inset-0 bg-gradient-to-r from-gray-300 to-gray-400 opacity-10"></div>
+                      <p class="text-gray-700 relative font-serif not-italic tracking-wider z-10">We will Exercise The Duties and Responsibilities of this Committee with Integrity, Collegiality and Care and maintain the Equilibrium in Both Co-curricular and Academical Activities.
+                      </p>
+                  </div>
+                  <div class="relative overflow-hidden bg-gray-200 p-8 rounded-xl shadow-lg transition-transform transform hover:-translate-y-2 vision-box">
+                      <div class="absolute inset-0 bg-gradient-to-r from-gray-300 to-gray-400 opacity-10"></div>
+                      <p class="text-gray-700 relative font-serif tracking-wider not-italic z-10">To be the Catalyst for the People in the College to Inspire the Moments of Optimism and Happiness.
+                      </p>
+                  </div>
+                  <div class="relative overflow-hidden bg-gray-200 p-8 rounded-xl shadow-lg transition-transform transform hover:-translate-y-2 vision-box">
+                      <div class="absolute inset-0 bg-gradient-to-r from-gray-300 to-gray-400 opacity-10"></div>
+                      <p class="text-gray-700 relative font-serif tracking-wider not-italic z-10">Bringing Improvements and innovation in all round development To Every Individual and Institute.
+                      </p>
+                  </div>
+              </div>
+
+                <br>
                 
                 <div class="mt-10 grid grid-cols-3 gap-6 text-sm max-w-lg mx-auto">
                     <div class="futuristic-border rounded-lg p-4 bg-gray-800 bg-opacity-80">
